@@ -4,7 +4,7 @@
    ========================================================================== */
 
 const SOCIALS = [
-  { platform: "Twitch", url: "http://twitch.tv/tpbee" },
+  { platform: "Twitch", url: "https://twitch.tv/tpbee" },
   { platform: "YouTube", url: "https://www.youtube.com/@tpbee" },
   { platform: "SoundCloud", url: "https://soundcloud.com/tpbee/tracks" },
   { platform: "Instagram", url: "https://instagram.com/tpbeedj" },
@@ -34,7 +34,7 @@ const LINKS = [
       },
       {
         title: "Watch Live",
-        url: "http://twitch.tv/tpbee",
+        url: "https://twitch.tv/tpbee",
         icon: "assets/icon-twitch-thumb.jpg",
       },
       {
@@ -207,7 +207,7 @@ function renderLinks() {
       block.items.forEach((item) => wrap.appendChild(renderStackItem(item)));
       container.appendChild(wrap);
     } else if (block.type === "group") {
-      container.appendChild(el("h3", { class: "link-group-heading", text: block.heading }));
+      container.appendChild(el("h2", { class: "link-group-heading", text: block.heading }));
       if (block.layout === "grid") {
         const grid = el("div", { class: "link-grid" });
         block.items.forEach((item) => grid.appendChild(renderGridItem(item)));
