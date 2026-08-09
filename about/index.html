@@ -84,10 +84,20 @@
     padding-left: 21px;
   }
 
+  #about-header a {
+    display: block;
+    flex-shrink: 0;
+    line-height: 0;
+    transition: opacity 120ms ease;
+  }
+
+  #about-header a:hover {
+    opacity: 0.85;
+  }
+
   #about-header img {
     width: 64px;
     height: 64px;
-    flex-shrink: 0;
     border-radius: 50%;
     object-fit: cover;
   }
@@ -186,7 +196,9 @@
 <main id="about-page">
 
   <header id="about-header">
-    <img src="/assets/avatar.jpg" alt="tpbee profile picture" width="64" height="64">
+    <a href="/" aria-label="Back to tpb.ee">
+      <img src="/assets/avatar.jpg" alt="tpbee profile picture" width="64" height="64">
+    </a>
     <h1>About tpbee</h1>
   </header>
 
