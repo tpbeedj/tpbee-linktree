@@ -6,9 +6,10 @@
    ========================================================================== */
 
 :root {
-  --profile-bg-color: #dd9c73;
+  --page-fallback-color: #0c1626;
   --tint-color: rgba(0, 0, 0, 0.24);
   --text-color: #ffffff;
+  --accent-color: #e0356e;
 
   --link-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%), rgba(255, 255, 255, 0.1);
   --link-bg-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%), rgba(255, 255, 255, 0.14);
@@ -32,7 +33,6 @@
   :root {
     --link-header-font-size: 16px;
     --link-text-font-size: 16px;
-    --desktop-frame-color: #c38a66;
   }
 }
 
@@ -63,13 +63,7 @@ body {
   font-family: var(--font-primary);
   font-weight: 500;
   color: var(--text-color);
-  background-color: var(--profile-bg-color);
-}
-
-@media screen and (min-width: 576px) {
-  body {
-    background-color: var(--desktop-frame-color);
-  }
+  background-color: var(--page-fallback-color);
 }
 
 img {
@@ -261,6 +255,7 @@ button {
 
 .link-card:hover {
   background: var(--link-bg-hover);
+  box-shadow: 0 0 0 1px rgba(224, 53, 110, 0.45), 0 4px 20px rgba(224, 53, 110, 0.25);
   transform: translateY(-1px);
 }
 
@@ -397,10 +392,11 @@ button {
   border: 0;
   cursor: pointer;
   color: var(--text-color);
-  transition: transform 150ms ease;
+  transition: transform 150ms ease, color 150ms ease;
 }
 
 .social-icon:hover {
+  color: var(--accent-color);
   transform: scale(1.075);
 }
 
