@@ -244,35 +244,3 @@ function renderSocials() {
 
 renderLinks();
 renderSocials();
-
-/* ==========================================================================
-   Background parallax
-   Background drifts at a fraction of scroll speed (clamped) so it reads as
-   set further back than the foreground links.
-   ========================================================================== */
-
-function initParallax() {
-  const bg = document.getElementById("page-background");
-  const speed = 0.15;
-  const maxOffset = 80;
-  let ticking = false;
-
-  function update() {
-    const offset = Math.min(window.scrollY * speed, maxOffset);
-    bg.style.transform = `translateY(-${offset}px)`;
-    ticking = false;
-  }
-
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (!ticking) {
-        requestAnimationFrame(update);
-        ticking = true;
-      }
-    },
-    { passive: true }
-  );
-}
-
-initParallax();

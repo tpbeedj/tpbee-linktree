@@ -104,7 +104,27 @@ button {
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
-  will-change: transform;
+}
+
+/* Slight downward-lagging drift on scroll, driven entirely by the
+   compositor (no JS scroll listener) so it can't stutter against
+   native smooth/momentum scrolling. Browsers without scroll-driven
+   animation support simply keep the background static. */
+@keyframes parallax-drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-80px);
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  #page-background {
+    animation: parallax-drift linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 550px;
+  }
 }
 
 /* ==========================================================================
