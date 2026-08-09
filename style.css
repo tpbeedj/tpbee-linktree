@@ -163,7 +163,7 @@ button {
 
 #profile-header {
   width: 100%;
-  padding: 48px 20px 32px 36px;
+  padding: 48px 20px 32px 41px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -187,7 +187,7 @@ button {
 }
 
 #profile-title {
-  margin: 0 0 0 -14px;
+  margin: 0 0 0 -8px;
   font-family: var(--font-display);
   font-weight: 400;
   font-size: 32px;

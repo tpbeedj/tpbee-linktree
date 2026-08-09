@@ -16,7 +16,7 @@ const LINKS = [
   {
     type: "featured",
     title: "Start Here",
-    url: "https://soundcloud.com/tpbee/deeper-liquid-liquid-drum-bass",
+    url: "https://soundcloud.com/tpbee",
     thumbnail: "assets/thumb-start-here.jpg",
   },
   {
