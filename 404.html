@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found — tpbee</title>
+<meta name="robots" content="noindex">
+
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/style.css">
+
+<style>
+  #notfound {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    gap: 16px;
+  }
+  #notfound h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 48px;
+    color: var(--accent-color);
+  }
+  #notfound p {
+    margin: 0;
+    max-width: 46ch;
+    color: var(--text-color);
+    line-height: 1.5;
+  }
+  #notfound a {
+    margin-top: 12px;
+    display: inline-block;
+    background: var(--link-bg);
+    -webkit-backdrop-filter: blur(20px) brightness(1.1) contrast(0.9);
+    backdrop-filter: blur(20px) brightness(1.1) contrast(0.9);
+    border-radius: var(--link-radius);
+    box-shadow: var(--link-shadow);
+    padding: 12px 24px;
+    color: var(--text-color);
+    font-weight: 600;
+    transition: background 120ms ease, box-shadow 120ms ease, transform 120ms ease;
+  }
+  #notfound a:hover {
+    background: var(--link-bg-hover);
+    box-shadow: 0 0 0 1px rgba(224, 53, 110, 0.45), 0 4px 20px rgba(224, 53, 110, 0.25);
+    transform: translateY(-1px);
+  }
+</style>
+</head>
+<body>
+
+<div id="page-background" aria-hidden="true"></div>
+
+<div id="notfound">
+  <h1>404</h1>
+  <p>That page doesn't exist. It might have moved, or the link's just wrong.</p>
+  <a href="/">Back to tpb.ee</a>
+</div>
+
+</body>
+</html>
