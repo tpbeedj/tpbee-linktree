@@ -133,7 +133,7 @@ button {
 
 #profile-header {
   width: 100%;
-  padding: 96px 20px 0;
+  padding: 40px 20px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -181,7 +181,7 @@ button {
 
 #links {
   width: 100%;
-  padding: 0 var(--link-gap) 8px;
+  padding: 40px var(--link-gap) 8px;
   display: flex;
   flex-direction: column;
   gap: var(--link-gap);
@@ -189,7 +189,7 @@ button {
 
 @media screen and (min-width: 576px) {
   #links {
-    padding: 0 calc(var(--link-gap) * 2) 8px;
+    padding: 40px calc(var(--link-gap) * 2) 8px;
   }
 }
 
