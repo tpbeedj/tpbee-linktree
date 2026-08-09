@@ -406,3 +406,24 @@ button {
   fill: currentColor;
   pointer-events: none;
 }
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+#site-footer {
+  width: 100%;
+  padding: 0 var(--link-gap) 24px;
+  text-align: center;
+}
+
+#site-footer a {
+  color: var(--text-color);
+  opacity: 0.6;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+#site-footer a:hover {
+  opacity: 1;
+}
