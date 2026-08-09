@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tpbee — Labels</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #0a0e14;
+  }
+  body {
+    padding: 24px 0 60px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Label picker. Paste whole block into Fourthwall Custom HTML.
+     Endpoint URL lives in data-endpoint on the div below. -->
+
+<div id="lblpick" data-endpoint="https://script.google.com/macros/s/AKfycbwy71fam2Zk7ugBB-d5jnw6tYs7xWdFBz-7Joiav9XRqVc_6EuGHyFN_IYHdihNr55XuQ/exec">
+  <div class="lp-head">
+    <h2 class="lp-h">Would you check it out?</h2>
+    <p class="lp-sub" id="lp-intro">Click any label you'd actually go and listen to. The number is how many releases they've put out between 1 Jan and 18 Jul 2026 &mdash; it's there to show who's active, not who's good. Ignore anything you don't know; you don't have to get through them all.</p>
+  </div>
+
+  <div class="lp-controls">
+    <input type="search" id="lp-q" placeholder="Search labels&hellip;" autocomplete="off">
+    <button type="button" class="lp-toggle" id="lp-sort">Sort: random</button>
+    <button type="button" class="lp-toggle" id="lp-only">Show picked only</button>
+  </div>
+
+  <div class="lp-grid" id="lp-grid"></div>
+  <div class="lp-empty" id="lp-empty" style="display:none">Nothing matches that.</div>
+
+  <div class="lp-bar">
+    <input type="text" id="lp-name" class="lp-name" placeholder="Your name" autocomplete="name" maxlength="40">
+    <span class="lp-count"><b id="lp-n">0</b> picked</span>
+    <button type="button" class="lp-send" id="lp-send" disabled>Submit</button>
+  </div>
+</div>
+
+<style>
+#lblpick{--lp-bg:#0a0e14;--lp-chip:#121a24;--lp-chip-h:#17222f;--lp-line:#1e2a38;--lp-text:#c9d6e2;--lp-dim:#5f7285;--lp-acc:#2fd4c8;--lp-acc-d:#1b7d76;background:var(--lp-bg);color:var(--lp-text);font:14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding:22px 18px 0;border-radius:10px;max-width:1240px;margin:0 auto;-webkit-font-smoothing:antialiased}#lblpick *{box-sizing:border-box}#lblpick .lp-head{border:1px solid var(--lp-line);background:#0f151d;border-radius:8px;padding:18px 20px;margin-bottom:6px}#lblpick .lp-h{margin:0 0 6px;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--lp-acc);font-weight:600;line-height:1.3}#lblpick .lp-sub{color:var(--lp-dim);font-size:13px;margin:0;max-width:64ch;line-height:1.5}#lblpick .lp-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:5;background:var(--lp-bg);padding:12px 0}#lblpick input[type=search]{flex:1;min-width:190px;background:var(--lp-chip);border:1px solid var(--lp-line);color:var(--lp-text);padding:9px 12px;border-radius:6px;font-size:14px;outline:none;margin:0;height:auto}#lblpick input[type=search]:focus{border-color:var(--lp-acc-d);box-shadow:none}#lblpick .lp-toggle{background:var(--lp-chip);border:1px solid var(--lp-line);color:var(--lp-dim);padding:9px 14px;border-radius:6px;cursor:pointer;font-size:13px;white-space:nowrap;font-family:inherit;letter-spacing:normal;text-transform:none;height:auto;width:auto}#lblpick .lp-toggle.on{color:var(--lp-acc);border-color:var(--lp-acc-d)}#lblpick .lp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px}#lblpick .lp-item{background:var(--lp-chip);border:1px solid var(--lp-line);border-left:2px solid var(--lp-line);border-radius:5px;padding:11px 13px;cursor:pointer;user-select:none;-webkit-user-select:none;transition:background .12s,border-color .12s;display:flex;align-items:center;gap:8px;font-size:14px}#lblpick .lp-item:hover{background:var(--lp-chip-h)}#lblpick .lp-item .lp-num{color:var(--lp-dim);font-size:11px;flex:none;font-variant-numeric:tabular-nums;background:#0b1219;border:1px solid var(--lp-line);border-radius:3px;padding:1px 5px;margin-left:auto}#lblpick .lp-item .lp-tick{color:transparent;font-size:13px;flex:none}#lblpick .lp-item.sel{border-color:var(--lp-acc-d);border-left-color:var(--lp-acc);background:#0d211f;color:#eaf7f5}#lblpick .lp-item.sel .lp-num{color:var(--lp-acc);border-color:var(--lp-acc-d)}#lblpick .lp-item.sel .lp-tick{color:var(--lp-acc)}#lblpick .lp-bar{position:sticky;bottom:0;background:rgba(10,14,20,.95);border-top:1px solid var(--lp-line);backdrop-filter:blur(8px);padding:14px 0;margin-top:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}#lblpick .lp-name{background:var(--lp-chip);border:1px solid var(--lp-line);color:var(--lp-text);padding:9px 12px;border-radius:6px;font-size:14px;outline:none;width:150px;flex:none;margin:0;height:auto;font-family:inherit}#lblpick .lp-name:focus{border-color:var(--lp-acc-d);box-shadow:none}#lblpick .lp-name::placeholder{color:var(--lp-dim)}#lblpick .lp-count{color:var(--lp-dim);font-size:13px;flex:1}#lblpick .lp-count b{color:var(--lp-acc);font-weight:600}#lblpick .lp-send{background:var(--lp-acc);border:0;color:#04201e;font-weight:600;font-size:14px;padding:11px 22px;border-radius:6px;cursor:pointer;font-family:inherit;letter-spacing:normal;text-transform:none;width:auto;height:auto}#lblpick .lp-send:disabled{background:#1c2b39;color:var(--lp-dim);cursor:default}#lblpick .lp-done{border:1px solid var(--lp-acc-d);background:#0d211f;border-radius:8px;padding:24px;margin-bottom:18px}#lblpick .lp-done h2{margin:0 0 10px;font-size:15px;color:var(--lp-acc);letter-spacing:.14em;text-transform:uppercase}#lblpick pre{background:#080c11;border:1px solid var(--lp-line);border-radius:6px;padding:12px;overflow:auto;max-height:260px;font-size:12px;color:var(--lp-dim);margin:12px 0 0;white-space:pre;font-family:ui-monospace,Menlo,Consolas,monospace}#lblpick .lp-empty{color:var(--lp-dim);padding:24px 4px}@media (max-width:520px){#lblpick{padding:16px 12px 0}#lblpick .lp-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
+</style>
+
+<script>
+(function(){
+  // "Name:releases" pairs, split on load. Names may contain ":" so we split on the last one.
+  var LABELS = "008 Recordings:31|0207 Def Jam:3|1985 Music:14|1undread:3|24 Karat Recordings:32|303 BPM:3|4 Jungle Records:12|7th Cloud:4|88 Entertainment:5|99 records:3|Abducted LTD:10|absrd wrld:4|Accelerant Records:15|ADRO Records:5|AGN7 Audio:5|AIRGLO MUSIC:3|Airlance:5|AIRLINE DIGITAL:6|Ajanss Records:3|all in good time.:3|All Street Recordings:9|Alpha Circuit:7|Altius Sounds:5|ALUS Audio:3|Amusement Audio:18|Anjunabeats:3|Annihilation Audio:6|Another Chance Records:5|Apokain:6|Apothecary Records LLC:4|Approach Records:5|Architecture Recordings:8|Armada Music:7|Armshouse Recordings:7|Arrival Archetype:4|ARTCATS COLLECTIVE:4|Artistfy Music:7|ARTISTPORTAL:7|Atomrise Sounds:3|Audio Addict Records:3|Audio Chemistry:3|Audio Entropy:6|Audio Overload Jungle Records:13|AUDIO Stage Records:3|Audiofelonzrecords (AFR):3|Automata Music:30|Auxiliary:4|B-Nasty Beats:3|Bad Chemistry Recordings:5|Bad Habitz Recordings:4|Bad Seed Creations:7|Banished Beats:11|Bass Boosted:3|Bass Grime Records:43|Bass Meal:5|BASS PLANTERS:5|Bass Portal:5|Bass Rabbit Recordings:4|Bass Star Records:5|Bass-A-holix Anonymous:4|Bass-A-holix Anonymous Dark Label:5|BassAssassins Records:4|BASSCVLT:4|Basseffect:19|BassLayerz Recordings:9|Bassrush Records:8|BAYVARD Music:5|BearSquatch Records:3|Beat Machine Records:3|Beatalistics:5|BeatzbyChas:3|Behavior Recordings:5|Bensley:4|BFJ Music:6|Bianco & Nero:3|Biological Beats:3|Bios Contrast Music:3|Black Monsta Records:4|Black Noiz Recordings:6|Blackbox Records Canada:3|Blackout Music NL:12|BLAZMA:5|Blinding Light Records:15|Blondie Records:6|Blot:26|BNC Express:4|Bode V Music:6|Bolt Records:9|Bonnot Music:5|Boom 93:3|Boom Records LLC:3|Boomwall Records:27|Born On Road:6|BoujeeBass TV:14|BOYZROW RECORD:7|BrainRave Music:8|BreakBeat Culture:3|Breakbeat Punk:11|BRIGSY:3|Broke:4|C Recordings:22|C4C Recordings:5|Cactus Beat Records:3|Calligraphy Recordings:3|Cancelled Digital:4|Carbon Music:6|Cat In The Bag:4|Cataclysm Recordings:18|Celsius Recordings:28|Chaos Audio:5|Chapter Eight:3|Chemical Velocity:5|Chill Cake:4|CK Records:4|Clann Records:3|Close 2 Death:3|CloudColour Records:3|ClusterFuck Records:6|Cocaine Records - Bulgaria:3|Codename: RCRDS:6|Coffee Shop Jams:9|Cohesive Music:6|Collateral Records:5|Compressor Recordings:13|Computer Integrated Audio:9|Concrete Jungle Music:7|Conquest Recordings:4|Covert Garden:3|Crate Classics:18|Create Capital:9|Create Music Group:20|Cresta La Cultura:5|Critical Music:16|CRNG MUSIC:5|CrossPoint Records:3|Crucast:21|Crypt:3|Cyduck:9|Cygni:4|Dan Jet:4|Dance Concept:4|Dance Macabre:4|Dark Machine Recs:13|Dark Nois- Records:16|Darkroom Bureau:4|Darkshire Sound:8|Data Music:3|Dawn Of Music Records:3|Day Ones:7|DDRRAAGG:3|deadpup0:3|Deafull Music:3|Decypher Discovery:4|Deep Elite:3|Deep In The Jungle Records:7|Deep Jungle:5|Deep S(e)oul:6|Deeper DNB:5|Deeper Than Roots:4|DEEPNAS:15|Default Recs:7|Defiance Music:5|Defiant:3|Defrostatica Records:3|Delsin Records:3|Delta9 Recordings:9|DEM Recordings:5|Demma Underground:7|Detached Audio:4|Deviant Drums records:8|DeVice:24|Dialect Audio:13|Different Styles Music:14|Digital Fusion Records:3|Digital Soundboy:4|Dim Mak Records:3|Dirtbox Recordings:11|DIRTY KITCHEN RAVE:12|Dispatch Recordings:16|Dj SaeRo Records:11|DLT9:3|DnB Active Records:5|DnB Allstars:14|DnB Doctor.:26|DNB LEAK:6|DnB Shack Records:3|DNB UNITED RECORDS:3|DNBB Digital:8|DNBB Records:22|DNBTV:3|Dojo Audio:3|Dope Ammo:3|Dreams & Deep:4|Drippyboiii Recordings:3|DropZoneMusic.org:20|Drum Pusher Recordings:11|Drum Rattle Records:6|Drum&BassArena:7|Drumcaste Collective:4|DSCI4:3|Dub Shotta:16|Dubplate Supplier:18|Dubstomp 2 Bass Records:9|Dubstropolis:5|Dubthing Records:25|Eatbrain:14|ECK RECORDS:3|Electric Eden Records:8|Electric Sunshine Cult:4|Elephant Trunk:23|Elevate Records:16|Embassy 9:8|Embeats Recordings:3|Emoushn Records:6|Empathy Audio:5|Emphaseas Music:9|EmpireX Records:17|Enhanced Recordings:3|ENTR0PY Records:5|EPO22 Music Tales:5|Evolution Chamber:18|Exert:26|Existence is Resistance:8|ExperimentalBass Records:3|Faction Digital Recordings FDR:3|FAT VIBEZ Records:3|Felix Gregis records:4|Filterjam:7|Findz HQ:4|FIVE ALLEY:7|Flexout Audio:20|Flight Pattern Records:4|Flightcase Recordings:3|Fokuz Recordings:29|Footnotes:3|For Real Recordings:7|Format Music dnb:5|Formation Records:10|Foundation Recordz:5|Four Corners:12|Fragrance:6|Front Room Productions:3|Frontroom Recordings NZ:3|Fruits Of Flava:4|Full Cycle:9|Full Phat Records:8|Full Send DnB:5|Function Records:4|Fusion State Records:3|Future:8|Future Projects:10|Future Resonance:14|FVYDID:4|FX909 MUSIC:7|Galactic Rave:3|Galacy:14|Gammanh Creative:7|GANGSTER T1ME:6|Garage Shared:5|Garde:3|GDNBC:6|Gemini Gemini:8|Genome Records:3|Get Wild:6|Gheddo Story:3|Ghost Snares:3|Gigabeat Records:4|Giggsby Records:10|GIIDUP Music:7|Glitch.:14|Global League:3|Goldfat Records:3|Good Voodoo Music:3|Goost Distribution:12|Goost Music:11|Gorilla Warfare:15|Gradient Records:4|Grand Alliance Music:3|Grand Dark Audio:4|Grand Theft Audio Recordings UK:5|Grave:3|Greco-Roman:3|Grid Recordings UK:18|Gunsta Records:22|Gutting Audio:6|Gysnoize Recordings:21|Hacked Records:8|Hanzom Music:9|Hardcore Energy:4|Heart Twice Records:5|Heavy Sonics Records:8|Helix Records:3|HEM Records:6|Hi Resolution:3|HI-FI Jungle:3|High Bass Audio:4|High Resistance:42|High Tea:18|High Tree Records:6|Holographic Audio:3|Hoofbeats Music:3|Hooked Sounds Records:6|Horizon Audio:4|HORUS:5|Horus Music Limited:7|Hospital Records:31|Hotcity82records:3|Hotelsinus:3|housemagazine.cz records:7|Ictasis Music Group:19|igroovemusic:10|Illegal Audio:4|iM Electronica:54|IMPOLITE Records:4|In A Scuffed Style:3|In Da Jungle Recordings:5|Incurzion Audio:3|Influence Records:3|Influential Records:3|Influenza Media:11|Inner City Dance:8|Innersound Digital:4|INSIDE DNB MUSIC:5|Intabeats Music:3|Intaception:3|Integral Records:3|Interplay Unity:6|Interstellar Audio:3|Intrigue Music:3|Invicta Audio:8|Ion Drive Music:6|Iparallels Records:23|Iron Fist Audio:3|IX Recorders:6|J.Glow:6|Javabass Recordings:6|Jazz & Bass:3|Jessee Music:3|JEWEL DEAL LTD:3|Joachim Nissen:4|Joog Music:3|Jungle Cakes:13|Jungle Science:6|Jungle Tings Audio:10|K.Willy Records:3|K2:8|Keeno Music:5|Kevlar Beats:12|KevlarPukks:4|Kill Inc Drum & Bass:5|KillerBo Records:5|Kniteforce Records:6|Koba Audio:10|Kos.Mos.Music:3|Kosenprod:4|KP Sound:3|Kulture Cru Records:3|Kuma Records:5|KUMO Collective:3|KushSessions:6|Lateral Vision Recordings:8|Let It Roll:5|Let Them Cook Records:7|LFTD Global:7|Life For Music:5|Light New Fires:3|Liondub International:3|Liquicity Records:17|Liquid (UK):4|Liquid Brilliants:50|Liquid Drops:9|Liquid Flow:4|Live History Records:8|Livelab Records:4|Lizplay Lab Division:4|Lizplay Records:84|Locked Up Music:5|LoL:5|Lost In Dreams:3|Lost In The Past Music:3|Lost Together Recordings:5|Loud Volume:4|Love For Low Frequencies:5|LoveThatBass:5|Low Down Deep Recordings:16|LowFreqMX:14|LuvDisaster Records:9|LVL Music:4|LVLD Music:7|LVLD MUSIC:30|LW Recordings:26|M Ocean Records:7|Machinist Music:7|Madness Dance Music Records:4|Magicland Records:9|Mainframe Recordings:13|Majestic Collective:3|Make Your Era:23|Mammal Sounds Records:3|Manifest:54|Mathematica Records:4|mau5trap:4|Media Land:4|Melodic Drums Recordings:6|Metalheadz:9|Misneach Recordings:3|Mitekiss:3|MMB Records:4|Modern Conveniences:4|Modez of Vibration:3|MODUS:6|Mofo Recordings:4|Moi Fox Recordings:9|Momentive Recordings:3|Monkey B Studio:4|Monofire Records:18|Monstercat:29|MONTA:6|Moonkat Records:5|Moonshine DnB:6|Morii Records:3|Motive Hunter Audio:5|Mugic.us Records:12|Multiza Distribution:16|Murmuration Records:5|Must Make Music:8|Mustache Crew Records:4|Mustard Music LTD:8|Muti Music:3|MyTrack Records:16|Máquina:3|N.W.S Digital:14|Nahual Records:7|Nasta Nova Records:5|Natty Dub Recordings:4|NCounter Music:3|Nebula Bass Records:3|Nebula DnB Records:16|Nebula17:3|Neksus Sound:11|Nemesis Recordings Digital:5|Neoluminum:8|Neosignal Recordings:5|Neuroheadz:11|Neurophoria Recordings:3|NeuroPlague Music:5|Neuropunk Records:17|Next:Gen Audio:9|Nexxus Recordings:6|Night On Earth Records:10|Nixxy Rain Music:3|No Reclaim:7|No Way Back:7|nodable distribution ​:8|NOIZE (Plasmapool):13|None Decay Music:3|None60:4|Northern Sunsets:4|Northwest Records:5|Nothing But:13|NRFNKD:3|Nu Elementz Music:6|Nuclear Bass Records:10|NUFORM:4|Numero Uno Sounds:4|NutThing:3|NYX Recordings:7|OBSIDIAN RECORDS UK:4|OCC Recordings:6|Octavated Audio:6|Off-License Records:3|Offworld Recordings:6|Omni Music (UK):22|ONE7AUDIO:7|ONE7SIX:12|onesevenfour:6|OnlyDrums:5|Onset Audio:11|Ophelia:5|Optic Portal:3|Optivus Music:6|Orbit 174:4|Organized Grime Recordings:5|Original breed recordings:3|Original Key Records:3|Ornament170:4|OTD - On The Decks:3|Our Sound:6|oury:8|Outer Heaven:4|Outer Limits Music:4|Outline Audio:4|Overdose Temptation Recordings:3|Overview Music:18|Ozriderz:10|Pandorum Records:14|Paperfunk Recordings:20|Pata Negra Records:11|Pause Recordings:5|PB-Records:3|Peng Audio:4|PEREGRINO:10|Phase Records DNB:9|Phaze One:5|Phreak DnB:14|Pick The Lock Records:6|Pilot.:6|Pin Drops:3|Pink Panties Records:4|Pizza Hotline:4|Planet Mu:3|Plat:form:3|Play Me Records:20|play:musik:4|Playaz:5|PMP Records:3|Portal Recordings:3|PRDS Direct:3|Primate Music:3|PRO STEREO:3|Pro-Tunes:4|profimusic/Warner Music Central Europe:3|PROJECT ONE AUDIO:7|Promo Audio Recordings:5|Propa Talent:3|Propane Records:3|Proper Decent Choons:4|PullUp Recordings:3|R.O.A.M:8|Raider Records:3|Ramp Up! Records:3|Ranger Records:9|Ransaked Records:3|Ransom Recordings:3|RAW UK:5|Reactor 4:3|realsyck:3|Rebeat:3|Rebel Music:8|RECORDS GROUP:6|Red Alfa Records:3|RFR Digital:12|RGJ Recordings:4|Ridmic:24|Ring Mode Records:3|Riot Records:21|Riverside Records:3|Rollout Records:7|RONEeS Records:12|Rosebay Music:4|Rosebloom Records:4|ROUNDEX RECORD BASS:8|RouteR:5|Rubberband$:5|Ruffinn Records:3|Run That Bass:4|Rupture LDN:4|Salia Sounds:7|Salt Loader Records:13|Samsara Beats:4|Samurai Music:6|Saucery Music:3|Savory Audio:12|SDI Recordings:5|Sea~rène:3|SenkaSonic:4|Serial Killaz:18|Shape Records:12|Shimbala Records:3|Shogun Artist Services:3|Shogun Audio:29|Shoot Recordings:3|Sick Dance Moves:3|SINFUL MAZE:16|Singularity Records:3|Skamele Recordings:9|SKIYE:3|Skyworks:3|Sleepless Music:3|Slingshot Audio:13|Smart People Production:53|Smooth N Groove Records:5|Sofa Sound:18|Solocat:6|Sonic Fiction Recordings:3|Soul Deep Digital:3|Soul Deep Exclusives:4|Soul In Motion Records:12|Soul Trader Records:10|SOULTRIBE MUSIC LTD:19|Soulvent Records:22|SoundBox Music:4|SoundMuseum:6|sounds2feel Records:7|Souped Up Records:12|South Yard:22|SOVIETT Lenivo:3|Soviett Rave:6|Space Cadet:3|Spatial:3|Spearhead Records:16|Spynal Records:3|Stellar Audio:6|STEREODUCK:3|Stoic Music:8|STONX MUSIC:11|Straight Up Breakbeat:5|Strangers on Mars (SOMREC):4|Strictly Ragga Jungle Records:3|Styx Records:5|Sub Generation Records:9|Sub Motionz:7|Sub Wavelength Recordings:7|Sub-liminal Recordings:8|Subdue Audio:7|Subplate Recordings:29|Substrate Records:3|Suburban Base Records:7|Sun & Shadow:3|SUNANDBASS Recordings:3|Sunshine Records (US):6|Sweat It Out:7|Sweep Da Scene Records:39|Symmetry Recordings:6|Symphonic Starter:18|SyTrac:4|T3K:4|Tamborim Records:4|Technique Recordings:11|Textures Music Group:28|Thames Delta Recordings:24|The Audio Atelier:3|The Combined Force:5|The Dystopian Collective:14|The Elements Of Tech & Bass Recordings:52|The Foundation:4|The Konklave Records:6|The North Quarter:9|TheSoul:4|ThirtyOne Recordings:4|Timbali Music:3|TMYS:4|Tonrecords:9|Tornado Records:4|Totally Liquid:19|TransFrequency Recordings:3|Transparent Audio:16|Trendkill Records:3|Triamer Recordings:3|Trigga Fingaz Records:5|TRIP AND BASS Records:11|Triptych Music:3|Tropical Lab Records:10|True Color:4|Trust Audio:5|Truth Hertz:5|TRXX:3|Tsunami (UK):4|Tuff Tempo:4|Tung Tulip:4|Twinkle Label:17|Tytanium Armour Recordings:3|U.M.M:4|UFO Recordz:4|UKF:33|Ukraine Dancing Label:6|Ukroniq Music:3|Unbeyond Anthologies:4|Unchained Recordings:6|Unchained Soul Records:7|Uncommon Records:3|Underground Bass Audio:4|Underground Major Audio:4|Unknown To The Unknown:3|Up Ya Archives:6|UP4IT? Recordings:10|V Recordings:21|VALKYRIE MUSIC:5|Valley Breaks:8|Van Czar Series:3|Vandal Records:7|Vector Alpha Records:3|Very Mucky Music:3|Vexed Recordings:4|Vibe Addicts:10|VIBEZ' 93:3|Victor Chizhov:4|Viper Recordings:18|Vision Of Empire:4|Vision Recordings:6|Visionair Music:3|Voltage Artists Music:4|VR Records:3|VTO Records:5|WARETHEHOUSE:4|Warlock Audio:13|waterframes music:3|wavforme:7|Wayside Recordings:17|Weapon Audio:6|WEAREHUMANS:3|West Cove Recordings:4|Wicked Jungle Records LLC:4|Wild SpeeD Records:18|Wild West Recordings:3|Wobbles & Waffles:19|Work That Grind:3|World Wake Records:7|World Wide Records LLC:3|Yamatai Records:12|YANA Music:7|YosH:23|Yosh Bass:7|Zenzontle Breaks:3|Zombie Cats:3|Zombie Recordings UK:3|ZooBass Records:5|Zyn Records:4|КОСТЁР:25".split("|").map(function(s){
+    var i = s.lastIndexOf(":");
+    return [s.slice(0, i), parseInt(s.slice(i + 1), 10)];
+  });
+
+  var root = document.getElementById("lblpick");
+  var ENDPOINT = (root.getAttribute("data-endpoint") || "").trim();
+  var grid = document.getElementById("lp-grid");
+  var nEl = document.getElementById("lp-n");
+  var sendBtn = document.getElementById("lp-send");
+  var qEl = document.getElementById("lp-q");
+  var onlyBtn = document.getElementById("lp-only");
+  var sortBtn = document.getElementById("lp-sort");
+  var emptyEl = document.getElementById("lp-empty");
+  var nameEl = document.getElementById("lp-name");
+
+  // A ?name= in the URL still works and pre-fills the box, but typing it is the
+  // normal route. Whatever is in the box at submit time is what gets sent.
+  var who = "";
+  try { who = new URLSearchParams(location.search).get("name") || ""; } catch (e) {}
+  if (who) {
+    nameEl.value = who;
+    document.getElementById("lp-intro").textContent =
+      "Alright " + who + " — click any label you'd actually go and listen to. The number is releases between 1 Jan and 18 Jul 2026, just so you can see who's active. Ignore anything you don't know.";
+  }
+
+  var picked = {};
+  var pickedCount = 0;
+  var onlyPicked = false;
+
+  var order = LABELS.slice();
+  shuffle(order);
+
+  function shuffle(a){
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+  }
+
+  order.forEach(function(rec){
+    var name = rec[0];
+    var el = document.createElement("div");
+    el.className = "lp-item";
+    var s1 = document.createElement("span"); s1.textContent = name;
+    var s2 = document.createElement("span"); s2.className = "lp-num"; s2.textContent = rec[1];
+    var s3 = document.createElement("span"); s3.className = "lp-tick"; s3.innerHTML = "&#10003;";
+    el.appendChild(s1); el.appendChild(s2); el.appendChild(s3);
+    el._name = name; el._n = rec[1];
+    el.addEventListener("click", function(){
+      if (picked[name]) { delete picked[name]; pickedCount--; el.classList.remove("sel"); }
+      else { picked[name] = true; pickedCount++; el.classList.add("sel"); }
+      update();
+      if (onlyPicked) render();
+    });
+    grid.appendChild(el);
+  });
+
+  function update(){
+    nEl.textContent = pickedCount;
+    sendBtn.disabled = pickedCount === 0;
+  }
+
+  function render(){
+    var q = qEl.value.trim().toLowerCase();
+    var shown = 0;
+    var kids = grid.children;
+    for (var i = 0; i < kids.length; i++) {
+      var el = kids[i];
+      var okQ = !q || el._name.toLowerCase().indexOf(q) !== -1;
+      var okP = !onlyPicked || picked[el._name];
+      var vis = okQ && okP;
+      el.style.display = vis ? "" : "none";
+      if (vis) shown++;
+    }
+    emptyEl.style.display = shown ? "none" : "";
+  }
+
+  qEl.addEventListener("input", render);
+
+  onlyBtn.addEventListener("click", function(){
+    onlyPicked = !onlyPicked;
+    onlyBtn.classList.toggle("on", onlyPicked);
+    render();
+  });
+
+  var modes = ["random","a-z","active"];
+  var mi = 0;
+  sortBtn.addEventListener("click", function(){
+    mi = (mi + 1) % modes.length;
+    var m = modes[mi];
+    sortBtn.textContent = "Sort: " + (m === "a-z" ? "A–Z" : m === "active" ? "most active" : "random");
+    sortBtn.classList.toggle("on", m !== "random");
+    var kids = [].slice.call(grid.children);
+    if (m === "a-z") kids.sort(function(a,b){ return a._name.toLowerCase() < b._name.toLowerCase() ? -1 : 1; });
+    else if (m === "active") kids.sort(function(a,b){ return b._n - a._n; });
+    else shuffle(kids);
+    var frag = document.createDocumentFragment();
+    kids.forEach(function(k){ frag.appendChild(k); });
+    grid.appendChild(frag);
+  });
+
+  sendBtn.addEventListener("click", function(){
+    var list = Object.keys(picked).sort();
+    var typed = (nameEl.value || "").trim().slice(0, 40);
+    var payload = {
+      name: typed || "anonymous",
+      submitted: new Date().toISOString(),
+      picked: list
+    };
+
+    if (ENDPOINT) {
+      fetch(ENDPOINT, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {"Content-Type":"text/plain;charset=utf-8"},
+        body: JSON.stringify(payload)
+      });
+    }
+
+    var d = document.createElement("div");
+    d.className = "lp-done";
+    var h = document.createElement("h2");
+    h.textContent = "Nice one" + (typed ? ", " + typed : "");
+    var p = document.createElement("p");
+    p.className = "lp-sub";
+    p.textContent = list.length + " labels submitted. That's it — cheers.";
+    d.appendChild(h); d.appendChild(p);
+    if (!ENDPOINT) {
+      var pre = document.createElement("pre");
+      pre.textContent = JSON.stringify(payload, null, 2);
+      d.appendChild(pre);
+    }
+    root.innerHTML = "";
+    root.appendChild(d);
+    root.scrollIntoView({behavior:"smooth", block:"start"});
+  });
+
+  update();
+  render();
+})();
+</script>
+
+</body>
+</html>
