@@ -133,40 +133,45 @@ button {
 
 #profile-header {
   width: 100%;
-  padding: 40px 20px 0;
+  padding: 48px 20px 32px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  gap: 20px;
 }
 
 #avatar {
-  width: 96px;
-  height: 96px;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
   border-radius: 50%;
   object-fit: cover;
-  margin: 8px 0 16px;
+}
+
+#profile-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
 }
 
 #profile-title {
-  width: 100%;
-  max-width: calc(100% - var(--link-gap) * 2);
   display: flex;
-  justify-content: center;
-  margin-bottom: var(--link-gap);
+  justify-content: flex-start;
 }
 
 #profile-logo {
-  max-height: 96px;
+  max-height: 56px;
   width: auto;
   height: auto;
   object-fit: contain;
 }
 
 #tagline {
-  margin: 0 0 24px;
-  padding: 0 calc(var(--link-gap) * 2);
-  max-width: 460px;
-  text-align: center;
+  margin: 0;
+  max-width: 420px;
+  text-align: left;
   text-wrap: balance;
   font-size: var(--tagline-font-size);
   font-weight: 500;
@@ -181,7 +186,7 @@ button {
 
 #links {
   width: 100%;
-  padding: 40px var(--link-gap) 8px;
+  padding: 0 var(--link-gap) 8px;
   display: flex;
   flex-direction: column;
   gap: var(--link-gap);
@@ -189,7 +194,7 @@ button {
 
 @media screen and (min-width: 576px) {
   #links {
-    padding: 40px calc(var(--link-gap) * 2) 8px;
+    padding: 0 calc(var(--link-gap) * 2) 8px;
   }
 }
 
