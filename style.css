@@ -96,7 +96,10 @@ button {
 
 #page-background {
   position: fixed;
-  inset: 0;
+  top: -100px;
+  right: 0;
+  bottom: -100px;
+  left: 0;
   z-index: -1;
   max-width: var(--container-width);
   margin: 0 auto;
@@ -104,7 +107,7 @@ button {
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  will-change: transform;
 }
 
 /* ==========================================================================
