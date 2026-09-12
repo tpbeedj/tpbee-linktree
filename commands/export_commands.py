@@ -22,9 +22,10 @@ PAGE = HERE / "index.html"
 START_MARKER = "/* COMMANDS:START */"
 END_MARKER = "/* COMMANDS:END */"
 
-# Commands worth putting in the "Useful" section even though their response
-# doesn't contain a link. Hand-maintained - add to this if new info commands
-# get added to commands.json.
+# Fallback for commands with no explicit "public_useful" field set (older
+# entries from before that field existed, or ones nobody's touched yet).
+# Mark a command explicitly via the dashboard's Command Manager tab
+# ("Mark useful" button) instead of editing this list where possible.
 USEFUL_KEYS = {
     "id", "lastid", "kit", "mic", "controller", "camera", "pc", "decks",
     "monitors", "headphones", "schedule", "weather", "time", "add", "so",
@@ -32,7 +33,10 @@ USEFUL_KEYS = {
 }
 
 
-def is_useful(key, response):
+def is_useful(key, cmd):
+    if "public_useful" in cmd:
+        return bool(cmd["public_useful"])
+    response = cmd.get("response", "")
     return key in USEFUL_KEYS or "http://" in response or "https://" in response
 
 
@@ -50,7 +54,7 @@ def build_records(commands):
         access = cmd.get("access", "everyone")
         if access != "everyone":
             record["access"] = access
-        (useful if is_useful(key, response) else other).append(record)
+        (useful if is_useful(key, cmd) else other).append(record)
 
     key_fn = lambda r: r["trigger"].lower()
     useful.sort(key=key_fn)
