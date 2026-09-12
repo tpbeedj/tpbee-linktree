@@ -424,6 +424,10 @@ button {
   text-decoration: none;
 }
 
+#site-footer a + a {
+  margin-left: 16px;
+}
+
 #site-footer a:hover {
   opacity: 1;
 }

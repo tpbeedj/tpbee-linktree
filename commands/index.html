@@ -1,0 +1,2398 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3CTKX5TWD7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3CTKX5TWD7');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tpbee — Chat Commands</title>
+<meta name="description" content="Every command you can type in tpbee's Twitch chat — track info, gear, links, and a lot of nonsense.">
+<link rel="canonical" href="https://tpb.ee/commands">
+
+<meta property="og:title" content="tpbee — Chat Commands">
+<meta property="og:description" content="Every command you can type in tpbee's Twitch chat — track info, gear, links, and a lot of nonsense.">
+<meta property="og:image" content="https://tpb.ee/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://tpb.ee/commands">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="tpbee">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="tpbee — Chat Commands">
+<meta name="twitter:description" content="Every command you can type in tpbee's Twitch chat — track info, gear, links, and a lot of nonsense.">
+<meta name="twitter:image" content="https://tpb.ee/assets/og-image.jpg">
+
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/style.css">
+
+<style>
+  body {
+    padding-top: 24px;
+    padding-bottom: 60px;
+  }
+
+  #cmd-page {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 32px 20px 0;
+  }
+
+  #cmd-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-left: 21px;
+  }
+
+  #cmd-header a {
+    display: block;
+    flex-shrink: 0;
+    line-height: 0;
+    transition: opacity 120ms ease;
+  }
+
+  #cmd-header a:hover {
+    opacity: 0.85;
+  }
+
+  #cmd-header img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  #cmd-header h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.2;
+    color: var(--text-color);
+  }
+
+  #cmdlist {
+    --cl-line: rgba(255, 255, 255, 0.16);
+    --cl-dim: rgba(255, 255, 255, 0.6);
+    color: var(--text-color);
+    font-family: var(--font-primary);
+    font-size: 14px;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+  }
+  #cmdlist * { box-sizing: border-box; }
+
+  #cmdlist .cl-intro {
+    background: var(--link-bg);
+    -webkit-backdrop-filter: blur(20px) brightness(1.1) contrast(0.9);
+    backdrop-filter: blur(20px) brightness(1.1) contrast(0.9);
+    border-radius: var(--link-radius);
+    box-shadow: var(--link-shadow);
+    padding: 18px 20px;
+    margin-bottom: var(--link-gap);
+  }
+  #cmdlist .cl-intro p {
+    margin: 0 0 10px;
+    color: var(--cl-dim);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  #cmdlist .cl-intro p:last-child { margin-bottom: 0; }
+  #cmdlist .cl-intro code {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 12px;
+    color: var(--text-color);
+  }
+
+  #cmdlist .cl-controls {
+    position: sticky;
+    top: 8px;
+    z-index: 5;
+    background: var(--link-bg);
+    -webkit-backdrop-filter: blur(20px) brightness(1.1) contrast(0.9);
+    backdrop-filter: blur(20px) brightness(1.1) contrast(0.9);
+    border-radius: var(--link-radius);
+    box-shadow: var(--link-shadow);
+    padding: 12px;
+    margin-bottom: var(--link-gap);
+  }
+  #cmdlist input[type=search] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    background: var(--link-bg);
+    border: 1px solid var(--cl-line);
+    color: var(--text-color);
+    -webkit-text-fill-color: var(--text-color);
+    padding: 9px 12px;
+    border-radius: var(--link-inner-radius);
+    font-size: 14px;
+    outline: none;
+    margin: 0;
+    height: auto;
+  }
+  #cmdlist input[type=search]::-webkit-search-cancel-button { -webkit-appearance: none; }
+  #cmdlist input[type=search]::placeholder { color: var(--cl-dim); opacity: 1; }
+  #cmdlist input[type=search]:focus { border-color: var(--accent-color); box-shadow: none; }
+
+  #cmdlist .cl-section { margin-bottom: 26px; }
+  #cmdlist .cl-h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--accent-color);
+    margin: 0 0 4px;
+  }
+  #cmdlist .cl-h2-sub {
+    margin: 0 0 10px;
+    color: var(--cl-dim);
+    font-size: 12px;
+  }
+
+  #cmdlist .cl-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  #cmdlist .cl-item {
+    background: var(--link-bg);
+    -webkit-backdrop-filter: blur(20px) brightness(1.1) contrast(0.9);
+    backdrop-filter: blur(20px) brightness(1.1) contrast(0.9);
+    border: 1px solid var(--cl-line);
+    border-radius: var(--link-inner-radius);
+    padding: 10px 13px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+  }
+
+  #cmdlist .cl-trigger {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 13px;
+    color: var(--accent-color);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  #cmdlist .cl-tag {
+    font-size: 10px;
+    color: var(--cl-dim);
+    border: 1px solid var(--cl-line);
+    border-radius: 3px;
+    padding: 1px 5px;
+    flex-shrink: 0;
+  }
+
+  #cmdlist .cl-resp {
+    color: var(--cl-dim);
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre-line;
+    flex: 1 1 100%;
+  }
+
+  #cmdlist .cl-chip {
+    background: var(--link-bg);
+    border: 1px solid var(--cl-line);
+    border-radius: var(--link-inner-radius);
+  }
+  #cmdlist .cl-chip summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 13px;
+  }
+  #cmdlist .cl-chip summary::-webkit-details-marker { display: none; }
+  #cmdlist .cl-chip summary::before {
+    content: "+";
+    color: var(--cl-dim);
+    width: 1em;
+    flex-shrink: 0;
+    text-align: center;
+  }
+  #cmdlist .cl-chip[open] summary::before { content: "\2212"; }
+  #cmdlist .cl-chip:hover { border-color: var(--cl-dim); }
+  #cmdlist .cl-chip .cl-resp {
+    margin: 0 13px 12px 33px;
+  }
+
+  #cmdlist .cl-empty { color: var(--cl-dim); padding: 20px 4px; text-align: center; }
+
+  #cmd-back {
+    display: block;
+    margin-top: 32px;
+    text-align: center;
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  #cmd-back:hover {
+    opacity: 1;
+  }
+
+  @media (max-width: 520px) {
+    #cmd-page { padding: 24px 14px 0; }
+  }
+</style>
+</head>
+<body>
+
+<div id="page-background" aria-hidden="true"></div>
+
+<main id="cmd-page">
+
+  <header id="cmd-header">
+    <a href="/" aria-label="Back to tpb.ee">
+      <img src="/assets/avatar.jpg" alt="tpbee profile picture" width="64" height="64">
+    </a>
+    <h1>Chat Commands</h1>
+  </header>
+
+  <div id="cmdlist">
+    <div class="cl-intro">
+      <p>Type any of these in tpbee's Twitch chat, "!" included — e.g. <code>!id</code>.</p>
+      <p>An <code>AI</code> tag means gizmoduckeh riffs on that line rather than saying it word for word. A <code>mod</code> or <code>broadcaster</code> tag means you'll see it used, but only that role can run it.</p>
+    </div>
+
+    <div class="cl-controls">
+      <input type="search" id="cl-q" placeholder="Search commands…" autocomplete="off">
+    </div>
+
+    <section class="cl-section">
+      <h2 class="cl-h2">Useful</h2>
+      <div class="cl-list" id="cl-useful"></div>
+    </section>
+
+    <section class="cl-section">
+      <h2 class="cl-h2">Everything else</h2>
+      <p class="cl-h2-sub">Mostly nonsense. Tap one to see what it says.</p>
+      <div class="cl-list" id="cl-other"></div>
+    </section>
+
+    <p class="cl-empty" id="cl-empty" hidden>Nothing matches that.</p>
+  </div>
+
+  <a id="cmd-back" href="/">&larr; Back to tpb.ee</a>
+
+</main>
+
+<script>
+(function(){
+  // Generated by commands/export_commands.py from streaming-automation's
+  // commands.json - do not hand-edit this block, re-run the script instead.
+  /* COMMANDS:START */
+  var COMMANDS = {
+  "useful": [
+    {
+      "trigger": "add",
+      "response": "! command add ! action without the spaces",
+      "kind": "static"
+    },
+    {
+      "trigger": "camera",
+      "response": "tpbee is using any old camera phones he could find lying around - all connected via droidcam obs.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "controller",
+      "response": "tpbee is using a Alpha Theta XDJ-AZ controller with 2x Technics 1210's mk2 on Serato DVS, with Ortofon Digital Stylus.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "decks",
+      "response": "tpbee is using a Alpha Theta XDJ-AZ controller with 2x Technics 1210's mk2 on Serato DVS, with Ortofon Digital Stylus.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "discord",
+      "response": "hit https://tpb.ee for all links, including the discord",
+      "kind": "static"
+    },
+    {
+      "trigger": "fact",
+      "response": "Random fact: $(urlfetch https://uselessfacts.jsph.pl/random.json?language=en)",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "funktionlinks",
+      "response": "Like what you've heard? Of course you do! Check these links for more solid gold bangers: https://soundcloud.com/sasha-khan and https://soundcloud.com/quantummechanix",
+      "kind": "static"
+    },
+    {
+      "trigger": "gff",
+      "response": "Follow Global Funk Fam on all their social media here https://globalfunkfam.com",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "giveaway",
+      "response": "▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\nUpgrade your Shindig shenanigans! From hoodies to shower wristbands, we've got you covered Fam, enter the draw now! >> https://win.gff.dj/ \n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "headphones",
+      "response": "HD-25's of course",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "id",
+      "response": "Now playing: %artist% - %title%%labelinfo%",
+      "kind": "static"
+    },
+    {
+      "trigger": "inside",
+      "response": "https://insidednb.net supports the DnB community on twitch - go take a look",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "kit",
+      "response": "Kit commands: !mic !controller !camera !pc !wine !decks !monitors !headphones",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "lastid",
+      "response": "Previous track: %lastartist% - %lasttitle%%lastlabelinfo%",
+      "kind": "static"
+    },
+    {
+      "trigger": "links",
+      "response": "Want some more contact with tpbee? You lovely person you... here you go: https://linktr.ee/tpbee You now have access to a treasure trove of mixes, playlists, podcasts (on all GOOD podcast apps!) the Discord server, and a variety of other bits n bobs and other goodies...",
+      "kind": "static"
+    },
+    {
+      "trigger": "mhyh",
+      "response": "tpbee is proud to be part of the myhouseyourhouse family. Check them out at https://www.myhouseyourhouse.net",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "mic",
+      "response": "tpbee is using a Marantz MPM-1000 Condenser Mic",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "monitors",
+      "response": "tpbee is listening through Krk Rokit 7's x2",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "pc",
+      "response": "tpbee is using a MSI Laptop to run serato and is streaming via a custom built gaming PC",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "poorly",
+      "response": "Eight times a year, PoorlyPromoted deliver a full Sunday of liquid DNB, championing a diverse array of DJs, from established figures to emerging talents. Organised by tpbee, and supported by Interstellar Audio, we are committed to enriching the liquid DNB scene by providing a platform for exposure and exploration, ensuring the continuous evolution and appreciation of this soulful genre. https://poorlypromoted.live/",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "raid",
+      "response": "Raiding! everyone follow tpbee over to ${1} !",
+      "kind": "static",
+      "access": "broadcaster"
+    },
+    {
+      "trigger": "sammy",
+      "response": "The lovely @sammybeezz makes stuff whilst I stream - she's just opened her shop here... https://www.etsy.com/uk/shop/beesmade",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "sc",
+      "response": "Want more? Of course you do! LUL  https://soundcloud.com/tpbee/tracks",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "schedule",
+      "response": "Lovely Lazy Liquid here on Wednesdays and Sundays 9pm UK time.  If you can't work out what time that is for you, just click here https://www.twitch.tv/tpbee/schedule",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "schedulegff",
+      "response": "Check out the Global Funk Fam Schedule and add it to you phone to never miss a stream https://globalfunkfam.com/schedule",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "shinfo",
+      "response": "▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ Head to @Global Funk Fam 's socials or https://shindig.gff.dj/ for all the Shindig Countdown live stream news, music and more!   You have your ticket, right, fam? ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "shinstreams",
+      "response": "▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ Say whaaaat? @Global Funk Fam has teamed up with Shindig for a series of festival countdown live streams! Hop aboard our raid train every month! Whoop whoop!  ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬  https://shindig.gff.dj/ ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "so",
+      "response": "What a legend ${1} is! show them some love & give them a follow at https://twitch.tv/${1}",
+      "kind": "static",
+      "access": "mod"
+    },
+    {
+      "trigger": "socials",
+      "response": "Want some more contact with tpbee? you lovely person you... here you go: https://tpb.ee even all my setlists can be found there if you go hunting! enjoy x",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "store",
+      "response": "https://store.streamelements.com/tpbee",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "tee",
+      "response": "Do you like this tee - it's from @ytimid's shop go to https://www.flipblend.com/",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "time",
+      "response": "the current time for tpbee is ${time.Europe/Belfast}",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "together",
+      "response": "https://togetherwithukraine.bandcamp.com/album/together-with-ukraine",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "ubb",
+      "response": "If you are interested in DNB / Breakbeat Music, why not check out the United by Breakbeat Discord where you can find other events, live streams with similar tunes - for those hours where tpbee isn't live, that is!!!!! https://discord.com/invite/ubb",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "weather",
+      "response": "Current weather in ${1}: $(urlfetch https://wttr.in/${1}?format=3)",
+      "kind": "ai_influenced"
+    }
+  ],
+  "other": [
+    {
+      "trigger": "11",
+      "response": "Always more volume!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "1job",
+      "response": "thats right mo-fos, commandspam",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "333",
+      "response": "Gimme Gimme Gimme!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "420",
+      "response": "It's 420 o'clock somewhere! ☁️ ☁️",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "@sarahjane333xxx",
+      "response": "has snaffled someone's rewind !snaffle",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "adulting",
+      "response": "Trying to act the same age as my kids!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "allthejays",
+      "response": "Which one? !Jay !jay2 !jay3 !jay4 !jay5 !jay6 !jay13 !jay44 !jaycompliment !fafo !jauly",
+      "kind": "static"
+    },
+    {
+      "trigger": "amen",
+      "response": "AMEN to that! 🙏",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "arrows",
+      "response": "Shots fired!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "arrowsback",
+      "response": "Shots returned!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "aus",
+      "response": "🪃 G'Day! 🪃 ¿ʇɥƃᴉɹ 'sᴉɥʇ pɐǝɹ uɐɔ noʎ uǝɥʇ 'uɐᴉlɐɹʇsn∀ lɐǝɹ ǝɹɐ noʎ ɟI",
+      "kind": "static"
+    },
+    {
+      "trigger": "aussiefacts1",
+      "response": "No-one cooks shrimp on the barbie.",
+      "kind": "static"
+    },
+    {
+      "trigger": "ayup",
+      "response": "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⣿⣿⡿⢋⣩⣭⣶⣶⣮⣭⡙⠿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⠿⣋⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡙⢿⣿⣿⣿ ⣿⣿⣿⣿⣿⡃⠄⠹⡿⣿⣿⣿⣿⠟⠛⣿⣿⣿⣿⣷⡌⢿⣿⣿ ⣿⣿⣿⣿⣿⠐⣠⡶⣶⣲⡎⢻⣿⣤⣴⣾⣿⣿⣿⣿⣿⠸⣿⣿ ⣿⠟⣋⡥⡶⣞⡯⣟⣾⣺⢽⡧⣥⣭⣉⢻⣿⣿⣿⣿⣿⣆⢻⣿ ⡃⣾⢯⢿⢽⣫⡯⣷⣳⢯⡯⠯⠷⠻⠞⣼⣿⣿⣿⣿⣿⣿⡌⣿ ⣦⣍⡙⠫⠛⠕⣋⡓⠭⣡⢶⠗⣡⣶⡝⣿⣿⣿⣿⣿⣿⣿⣧⢹ ⣿⣿⣿⣿⣿⣿⣘⣛⣋⣡⣵⣾⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⢸ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⢸ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⢸",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "b2b",
+      "response": "Watch this space...",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "back",
+      "response": "WE'RE BACK!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "bacon",
+      "response": "!kappagen 🥓",
+      "kind": "static"
+    },
+    {
+      "trigger": "baked",
+      "response": "☁️ Baked to perfection! ☁️",
+      "kind": "static"
+    },
+    {
+      "trigger": "bali",
+      "response": "Most generous Yorkshireman I've ever known 😜",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "balli",
+      "response": "Big up to the bredder from The North!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "ballistikus",
+      "response": "Please ban me!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "bally",
+      "response": "Biggest balls on Twitch LUL",
+      "kind": "static"
+    },
+    {
+      "trigger": "ban",
+      "response": "Uh oh, the mods are on high alert!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "banger",
+      "response": "OOOOOOF!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "banhammer",
+      "response": "Fooookitoff!",
+      "kind": "static"
+    },
+    {
+      "trigger": "bass",
+      "response": "AWWWWWWWW THAT BASSSSSSSSS!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "bbq",
+      "response": "Fire up the grill, there's Banger after Banger over here!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "bday",
+      "response": "🎂 ${sender} wishes ${1} an amazing happy birthday! 🎂",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "bee",
+      "response": "Absolutely buzzing mate! 😁",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "beer",
+      "response": "@tpbee doesn't touch the stuff! Ask him about wine...",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "billy",
+      "response": "He doesn't have any mates.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "bleep",
+      "response": "...bloop!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "blend",
+      "response": "tpbee, dragging blends out that dont work since 2003!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "blintz",
+      "response": "Bong and a blintz?!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "bm",
+      "response": "BABY MAMONG LET'S GOOOOO!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "boom",
+      "response": "bastic!!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "bootay",
+      "response": "⠈⣿⣿⡻⠿⣳⠸⢿⡇⢇⣿⡧⢹⠿⣿⣿⣿⣿⣾⣿⡇⣿⣿⣿⣿⡿⡐⣯⠁ ⠄⠄⠟⣛⣽⡳⠼⠄⠈⣷⡾⣥⣱⠃⠣⣿⣿⣿⣯⣭⠽⡇⣿⣿⣿⣿⣟⢢⠏⠄ ⠄⢠⡿⠶⣮⣝⣿⠄⠄⠈⡥⢭⣥⠅⢌⣽⣿⣻⢶⣭⡿⠿⠜⢿⣿⣿⡿⠁⠄⠄ ⠄⣼⣧⠤⢌⣭⡇⠄⠄⠄⠭⠭⠭⠯⠴⣚⣉⣛⡢⠭⠵⢶⣾⣦⡍⠁⠄⠄⠄⠄ ⠄⣿⣷⣯⣭⡷⠄⠄⢀⣀⠩⠍⢉⣛⣛⠫⢏⣈⣭⣥⣶⣶⣦⣭⣛⠄⠄⠄⠄⠄ ⢀⣿⣿⣿⡿⠃⢀⣴⣿⣿⣿⣎⢩⠌⣡⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠄⠄⠄ ⢸⡿⢟⣽⠎⣰⣿⣿⣿⣿⣿⣿⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⠄⠄ ⣰⠯⣾⢅⣼⣿⣿⣿⣿⣿⣿⡇⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠄ ⢰⣄⡉⣼⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠄ ⢯⣌⢹⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠄ ⢸⣇⣽⣿⣿⣿⣿⣿⣿⣿⣿⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠄ ⢸⣟⣧⡻⣿⣿⣿⣿⣿⣿⣿⣧⡻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠄ ⠈⢹⡧⣿⣸⠿⢿⣿⣿⣿⣿⡿⠗⣈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠄ ⠄⠘⢷⡳⣾⣷⣶⣶⣶⣶⣶⣾⣿⣿⢀⣶⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠄",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "brb",
+      "response": "Much love ${sender}, see you soon ♥",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "breadcrumbs",
+      "response": "Please don't feed the ducks. Please do feed @tpbee He likes subs, bits and Haribo",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "break",
+      "response": "Gimme a break! OOF!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "brick",
+      "response": "LOUD NOISES",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "bs",
+      "response": "◄♠░▒▓₿ŕØꞰƎƞ░₷┼Ά₸Ξ▓ⱱ◌Ⱡ●23▓▒░♠► ~ 03/13/24 ~ 3:30pm EST twitch.tv/dj_latinagirl_1985 || 5:00pm EST twitch.tv/ladymegaspice || 6:30pm EST twitch.tv/tpbee || 8:00pm EST twitch.tv/josht3rr0r || 9:30pm EST twitch.tv/daley941dose || 11:00pm EST twitch.tv/inimical_dj || 12:30am EST twitch.tv/djunohoo || 2:00am EST twitch.tv/otter530 || 3:30am EST twitch.tv/djndoe1",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "bs2",
+      "response": "@buttascotchflava IN THE CHAT!! 👊",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "bump",
+      "response": "Oh hello!! Fancy seeing you here!!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "burner",
+      "response": "It's okay, it's not my credit card LUL <3",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "butt",
+      "response": "cheeks",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "bwoke",
+      "response": "It's bwoken!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "bye",
+      "response": "So long, farewell, Auf Wiedersehen, goodbye 👋🏽 thanks for stopping in",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "bye2",
+      "response": "Bye bye FWENNND! 👋😁",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "calm",
+      "response": "Eh! Eh! Alright! Alright! Calm down! Calm down!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "cameras",
+      "response": "Use the following to change camera view !camera1 !windowcam !facecam !deckscam !zoomcam !scrollcam",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "cap",
+      "response": "Anyone want a tpbee cap? (Not sure why you would) but due to popular demand... £20+p&p. Drop me a whisper and I'll sort you out!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "captain",
+      "response": "Salute the captain! He's a mini @tpbee !",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "catchat",
+      "response": "Diablo says hi! InuyoFace",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "chat",
+      "response": "big up the chatting crew, the more it's scrolling the more we rollin!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "cheers",
+      "response": "${user} raises a glass to everyone in chat! 🍷 Cheers!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "chill",
+      "response": "Let's just wind down for a minute 🎧😊",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "clang",
+      "response": "HOW VERY DARE YOU! 🤬",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "clouds",
+      "response": "☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️Vibe in the clouds ☁️☁️☁️☁️☁️☁️☁️☁️☁️☁️",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "clova",
+      "response": "\"Personally I prefer Grande\" (GreenishClovers)",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "clovers",
+      "response": "West Coast, baby!! ✌️",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "cookie",
+      "response": "Omnomnom 🍪",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "crepe",
+      "response": "Pipe and a crepe?",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "crew",
+      "response": "love this crazy little crew we have here ❤ 💙 ♥",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "dance",
+      "response": "♫ ${sender} is dancing ♫",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "dancing",
+      "response": "♬ ${sender} is dancing with ${1} ♬",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "dave",
+      "response": "He's John's mate.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "ddb",
+      "response": "DropDeadBum ! 🍑",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "deep",
+      "response": "...them deep basslines awwwwwww gets right inside!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "derf",
+      "response": "ɘяiɒɈƨA bɘяᖷ - !ɘlჸɈƨ ʜɈiw Ɉi ob bnɒ Ɉʜϱiя Ɉi ob ˎϱid Ɉi oꓷ",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "dickspin",
+      "response": "erm... wanna try typing that one again?! 🤣",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "dnb",
+      "response": "…………………………………………….. ⣿⣿⣿⢫⡭⣭⣿⣿⣿⣿⡭⢭⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⣿⣻⠿⠞⠀⢸⠒⠒⠒⢾⡆⠘⠾⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⡇⡇⠀⣶⠀⢸⠀⣶⡆⢸⡇⢰⡆⠀⡟⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⣇⣧⣀⣁⣀⣸⣀⣿⣇⣸⣇⣀⣁⣠⣇⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⠟⠿⠿⠿⢿⠿⠿⢿⣿⡿⠟⢛⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⡏⡿⠿⣿⢿⣿⣿⣿⣿⣿⡿⠿⡿⠿⣿⣿⣿⡿⣿⠿⢿⢹⣿⣿ ⡇⡇⠀⠛⡗⠒⡖⠒⡖⠒⡗⠒⡇⠀⠓⡦⠒⠒⢻⠀⠘⠒⢾⢻ ⡇⡇⠀⠒⡇⠀⠃⠀⠃⠀⡇⠀⡇⠀⠒⣇⠀⠒⢺⠀⢰⠀⢸⢸ ⣷⣝⢶⣶⣿⣶⣶⣶⣶⣶⣷⣶⣿⣶⣶⣿⣷⣶⣾⣶⣾⣶⣾⣸ ⣿⣿⣷⣙⣛⣛⣋⣛⣛⣛⣛⣛⣋⣛⣛⣋⣛⣛⣛⣛⣛⣻⣿⣿",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "drive",
+      "response": "Drive safely my friend! Hands on the road, eyes on the wheel or summink.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "drought",
+      "response": "No liquid from @tpbee in August!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "drums",
+      "response": "MORE DRUMS!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "drunk",
+      "response": "${sender} is ${random.1-100}% drunk rn.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "dso",
+      "response": "Double shout outs for everyone! YOU get a shout out and YOU get a shout out and...",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "duck",
+      "response": "${quote}",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "duckclouds",
+      "response": "🦆  ☁️🦆  ☁️🦆  ☁️🦆  ☁️🦆  ☁️ All these duck'n clouds 🦆  ☁️🦆  ☁️🦆  ☁️🦆  ☁️🦆  ☁️🦆  ☁️🦆  ☁️",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "duckhunt",
+      "response": "see a pesky duck in crosshairs? click that bad boy quack",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "ducklings",
+      "response": "@tpbee Mod Team Assemble!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "ducks",
+      "response": "${quote}",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "duckspin",
+      "response": "Imagine some duck emotes spinning around. There you go!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "duckus",
+      "response": "Viewers receive 100 DuckU's every 10 minutes I Subscribers receive 500 DuckU's every 10 minutes I Cheering cheers will receive 10,000 DuckU's for every 100 bits I Subscribing subscribers will receive 100,000 DuckU's upon subscribing I Following followers will receive 10,000 DuckU's upon following I Tipping non anonymous tippers will receive 50000 DuckU's for every £1 tipped.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "duet",
+      "response": "Sometimes lovely sometimes beugh",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "echo",
+      "response": "ECHO!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "efe",
+      "response": "Share the love! Everyone Follow Everyone!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "egg",
+      "response": "@keyboardmedic is a good egg 🥚",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "exercise",
+      "response": "Everything hurts.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "face",
+      "response": "Nope! Try again! LUL",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "fafo",
+      "response": "The more you fuck around, the more you find out. @jayn3ur0 2023",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "faith",
+      "response": "face af",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "faith2",
+      "response": "You gotta have Faith! 🙏🏼",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "faith44",
+      "response": "Oh heyyyyyy @faithfun has arrived! Now we can begin LUL <3",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "famalam",
+      "response": "You lot are the best! ♥️",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "feels",
+      "response": "This has ALL the feels Kreygasm",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "ff",
+      "response": "FFFFAAAAAIIIIITHHHH!!!!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "fight",
+      "response": "Take it outside! LUL",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "filth",
+      "response": "It's muckeh, duckeh!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "filthy",
+      "response": "dang ... this is filthy!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "fire",
+      "response": "!kappagen 🔥",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "fixed",
+      "response": "It was bwoken, now it's fixed mate! 🛠️",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "flapjack",
+      "response": "Flapjack and a cigarette?",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "floppy",
+      "response": "!kappagen 💾",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "folly",
+      "response": "Love a bit of floaty shit @DJFolly_DnB",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "folly2",
+      "response": "Love a bit of floaty shit @DJFolly_DnB",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "fred",
+      "response": "Do it big, do it right and do it with style! - Fred Astaire",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "fred2",
+      "response": "${sender} is dancing with Fred 🕺🏽",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "fred3",
+      "response": "Fred ONLY dances with @greenishclovers !! Get your own dancing man!!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "freeky",
+      "response": "Yo chat, we fink u freeky and we like you A LOT! <3",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "fresh",
+      "response": "@tpbee always has the freshest tunes for your earholes, except when they are not. SeemsGood",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "funk",
+      "response": "Funk right off!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "funktion",
+      "response": "Welcome, welcome, who's that in the duck pond? That's Alex Khan, Jim (Quantum Mechanix), Guy Tempral, Yugen, Ballistikus and tpbee in the mix! Let's go! Quack quack.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "future1",
+      "response": "I’m in the future it’s good init",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "fy",
+      "response": "⡟⠛⢻⣿⣿⣿⡟⠛⢻⣿⣿⣿⡿⠛⠛⠛⢿⡟⠛⢻⣿⣿⠛⢻⡟⠛⠛⠛⠛⣿ ⡇⠄⢸⣿⣿⣿⡇⠄⢸⣿⣿⡟⠄⢠⣶⡄⠄⢻⡀⠈⣿⡇⠄⣼⡇⠄⣶⣶⣶⣿ ⡇⠄⢸⣿⣿⣿⡇⠄⢸⣿⣿⡇⠄⢸⣿⡇⠄⢸⣇⠄⢹⠄⢰⣿⡇⠄⣀⣀⣀⣿ ⡇⠄⢸⣿⣿⣿⡇⠄⠈⠉⠉⣷⡀⠈⠛⠁⢀⣾⣿⡄⠄⠄⣾⣿⡇⠄⠛⠛⠛⣿ ⣷⣶⣾⣿⣿⣿⣷⣶⣶⣶⣶⣿⣿⣶⣶⣶⣿⣿⣿⣷⣶⣾⣿⣿⣷⣶⣶⣶⣶⣿ ⣿⣿⣿⣿⣿⡟⠛⢻⣿⠟⠛⣻⡿⠛⠛⠛⢿⣿⡟⠛⣿⣿⠛⠛⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⡄⠄⠏⠄⣰⡏⠄⣠⣶⡄⠄⢿⡇⠄⣿⣿⠄⠄⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⣿⡄⠄⣰⣿⡇⠄⣿⣿⡇⠄⢸⡇⠄⣿⣿⠄⠄⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⣿⡇⠄⣿⣿⣧⡀⠈⠛⠁⢀⣿⣇⠄⠙⠋⠄⣰⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⣿⣷⣶⣿⣿⣿⣿⣶⣶⣶⣿⣿⣿⣷⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⠟⠛⠛⠻⣿⡟⠛⣿⣿⠛⠛⣿⣿⡟⠛⠻⣿⡟⠛⠛⠛⠛⠛⣿⣿⣿ ⣿⣿⣿⠁⠄⣴⣦⣀⣽⡇⠄⠿⠿⠄⠄⣿⣿⠁⢀⠄⢻⣧⣤⡄⠄⣤⣤⣿⣿⣿ ⣿⣿⣿⠄⠘⣿⣿⠿⣿⡇⠄⣀⣀⠄⠄⣿⡏⠄⠾⠄⠈⣿⣿⡇⠄⣿⣿⣿⣿⣿ ⣿⣿⣿⣆⠄⠙⠁⠄⣼⡇⠄⣿⣿⠄⠄⡿⠄⢠⣤⣄⠄⢹⣿⡇⠄⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣷⣶⣶⣿⣿⣷⣶⣿⣿⣶⣶⣷⣶⣾⣿⣿⣶⣶⣿⣷⣶⣿⣿⣿⣿⣿",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "gc",
+      "response": "When the vibes are right and the planets are aligned, a wild @greenishclovers appears! GlitchCat",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "geeks",
+      "response": "Try !nerds",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "gh",
+      "response": "Gear heads.. ASSEMBLE!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "ginger",
+      "response": "Ummm, it was something about Ginger Rogers doing everything Fred did but backwards and in heals. Something like that.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "glitch",
+      "response": "Bleep Bloop Wub Wubbb Boing Boing Wahhhhh",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "goodbye",
+      "response": "No YOU hang up first!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "gooie",
+      "response": "The toast with the most!!!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "goose",
+      "response": "It's all loosey goosey tonight!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "gravy",
+      "response": "It's all gravy, baby 😎",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "greek",
+      "response": "Yiamas! 🍻",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "greenish",
+      "response": "ting, pong, zip, bang... I'm vibing - @greenishclovers",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "grouphug",
+      "response": "It's cuddle puddle time! Quack Quack!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "grouphug2",
+      "response": "Mmmm! Sweaty raver hugs!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "h",
+      "response": "Hur, Hur ;p",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "hard",
+      "response": "I'm going in no lube on this one - @tpbee",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "hb",
+      "response": "Happy Birthday to the legend Tpbee!! Now where's the wine?! tpbeeCigarduck tpbeeCap",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "hellooooo",
+      "response": "oh hai Medic! HeyGuys",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "here",
+      "response": "I'm here, but not here.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "high",
+      "response": "${sender} is ${random.1-100000000000000000000000000}% high rn.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "hit",
+      "response": "Don't stand on 19, hit hard and aim for 21 👊🏽",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "homer",
+      "response": "Stupid Flanders",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "horny",
+      "response": "Medic's Dream Horn",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "hug",
+      "response": "$(sender) runs to $(touser) and gives them the friendliest of hugs!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "hug2",
+      "response": "$(sender) hugs $(touser) right back and squishes the air right out of them!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "hydrate",
+      "response": "Wine counts, right?! LUL",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "hype",
+      "response": "hyped up in here!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "ice",
+      "response": "It's just hard liquid, innit",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "inconceivable!",
+      "response": "You keep using that word. I do not think it means what you think it means.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "increasecreditlimit",
+      "response": "the bank respectfully declines your application",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "inter",
+      "response": "▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ Interstellar Audio I GLOBAL EXPLORATION ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ \nComing up:\n00:00 sodievox\n01:00 the_d34d_b34t\n03:00 ScamCircuit\n05:00 BeersAndBeatsPDX\n06:00 DjDiFlux\n08:00 ZanteDnB\n10:00 tbc\n11:00 InterstellarAudio\n\n All Times in GMT(GMT00) ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "invite",
+      "response": "Join the Global Funk Fam Discord to keep up to date with all you favourite funk fam streamers. Https://x.globalfunkfam.com/invite",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jacksparrow",
+      "response": "Gentlemen, I wash my hands of this weirdness.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jaffa",
+      "response": "NomNom NomNom NomNom NomNom",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jauly",
+      "response": "You wot m8?! LUL",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jay",
+      "response": "What the hell is this nonsense, this isn't neuro!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jay13",
+      "response": "This is a Jay safe space! 😉",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jay2",
+      "response": "Yeah, nah!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jay3",
+      "response": "Ahahah calm ya tits Sheila 🤣",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jay4",
+      "response": "Future squad, represent!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jay44",
+      "response": "Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay Jay",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jay5",
+      "response": "I don't just like neurofunk. @jayn3ur0 Sept 2022",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jay6",
+      "response": "Ahoy hoy, ya c@nts! 😆",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jaycompliment",
+      "response": "Get F**ked! 🤣",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jazz",
+      "response": "Welcome to jazz club SeemsGood",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jd",
+      "response": "Alright my lover! These tunes are gert lush!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jfc",
+      "response": "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⠿⠛⡟⠛⢻⡟⠛⡟⠛⢿⡟⠛⠛⠛⠛⠛⠛⠛⠛⢻⠛⠛⣿⣿⣿ ⣿⣿⣿⣿⡇⠀⢀⠃⠀⣿⠀⢀⠇⠀⠈⠇⠀⢰⣤⠀⠀⣤⣔⠀⠀⠀⣼⣿⣿⣿ ⣿⣿⡿⠿⠁⠀⢸⠀⠰⠏⠀⣸⠀⠀⣄⠀⠀⣼⡟⠀⢸⣿⣿⡀⠀⣾⣿⣿⣿⣿ ⣿⣿⣥⡤⠤⠾⠿⠤⠤⣤⡤⠧⡤⠤⣿⡤⠤⠿⠧⠤⠾⠿⠧⠤⢤⠿⠿⣿⣿⣿ ⣿⣿⣿⠁⠀⣀⣀⠀⠀⣿⠀⠀⠇⠀⠈⡇⠀⢰⣀⠀⠀⣠⡄⠀⠀⠀⣴⣿⣿⣿ ⣿⣿⡿⠀⢀⣀⣸⠀⠠⠟⠀⠸⠀⠀⡄⠀⠀⣾⡿⠀⢰⣿⣷⠀⠀⣴⣿⣿⣿⣿ ⣿⣿⡇⣀⣾⣿⣿⣄⠀⢀⣀⣇⣀⣀⣿⣄⣀⣿⣇⣀⣾⣿⣏⣀⣀⣿⣿⡿⣿⣿ ⣿⣿⠟⠋⢀⡀⢀⡁⠀⢠⡟⠀⢸⠁⠈⠻⠁⠀⣀⠀⠀⢀⣰⠀⠀⠃⢀⣶⣿⣿ ⣿⣿⠀⢰⣿⣿⣿⡇⠀⣸⡇⠀⡌⠀⢀⠀⠀⠀⣿⠀⠀⣸⣿⡇⠀⠀⣿⣿⣿⣿ ⣿⣿⣄⡀⠉⠀⣈⣇⠀⠈⠀⣴⠇⢀⣸⣦⣀⢸⣿⣁⣀⣿⣿⣧⣀⣸⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "john",
+      "response": "He's Dave's mate.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "joinagain",
+      "response": "...just to be sure!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "joint",
+      "response": "May as well do something while you wait, 600 seconds is loooooonnnnng mate LUL ☁️",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "juan",
+      "response": "He's Pablos amigo",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jukebox",
+      "response": "This ain't a request show 😜",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jungle",
+      "response": "Any Jungle in, guy?",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "junglereply",
+      "response": "I've got the Tarzan and Jane of jungle just swung in on the vine this morning, mate. I'm telling you, this could turn Hare Krishna into a bad boy.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jv",
+      "response": "OCH, AYE! Janverse is loose in the hoose! 😎👍",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "jv2",
+      "response": "SUPERSTAR DJ, HERE WE GO!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "karen",
+      "response": "I want to speak to your manager!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "karen2",
+      "response": "This is outrageous! I've been coming here for months! I demand better service!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "karen3",
+      "response": "The manager is currently away, please don't leave a message, your call is not important to us, please don't stay on the line 😜",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "katja",
+      "response": "Oh Haiiiiii !!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "kiwi",
+      "response": "🥝 Kia ora! 🥝",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "km",
+      "response": "Nee Naw Nee Naw! Move out of the way, @keyboardmedic IS COMING THROUGH! 🤘🏽",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "km2",
+      "response": "Onze vriend met de kruidnoten! 🐿️",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "km3",
+      "response": "Onze vriend met de twee graden! 🤓",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "legend",
+      "response": "We have some legends in this stream today/tonight/this morning...wherever you are!! <3 Much love to you all!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "lg",
+      "response": "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⢀⣤⣶⣶⡄⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⢀⠀⠀⣤⣤⣶⡆⣶⣶⣿⡿⠛⢸⠃⣿⣿⠀⠛⠃⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⣿⣿⠀⠀⣿⣿⠁⠀⠀⣿⣿⡇⠀⠀⠀⠙⢿⣿⣷⣆⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⣿⣿⠀⠀⣿⣿⠿⠇⠀⣿⣿⡇⠀⠀⠀⣴⣶⠈⣿⡿⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⣿⣿⠀⠀⣿⣿⣀⡀⠀⣿⣿⡇⠀⠀⠀⠻⠿⠿⠛⠁⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⣿⣿⡿⠆⠿⠛⠛⠃⠀⠉⣉⣤⣴⣶⣤⡀⢸⣿⣿⡿⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⣠⣶⣾⣿⣿⣦⡀⢠⣿⣿⡟⠙⣿⣿⣿⢸⣿⣿⡇⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⣾⣿⣿⡇⢹⣿⣿⡇⢸⣿⣿⡇⠀⣿⣿⣿⢸⣿⣿⡇⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⣿⣿⣿⠀⠘⠛⠉⠁⢸⣿⣿⡇⠀⣿⣿⣿⠸⣿⣿⡇⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⣿⣿⣿⠀⣾⣿⣿⡇⢸⣿⣿⡇⠀⣿⣿⣿⠀⠿⠿⠁⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⣿⣿⣿⠀⢹⣿⣿⡇⢸⣿⣿⡇⢀⣿⣿⡿⢰⣶⣾⡇⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⣿⣿⣿⣇⣼⣿⣿⡇⠘⢿⣿⣿⣿⠿⠏⠀⠘⠛⠉⠁⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠘⠿⠿⠿⠛⠙⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "limewire",
+      "response": "Napster ...or GTFO!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "lineup",
+      "response": "Today's poorly promoted lineup (UK times) 🎶 07–08:59 ZanteMusic 💜 | 09–10:59 SirenityDNB 🚀 | 11–12:59 B-Complex 🎶 | 13–14:59 IIJamesIII 🔥 | 15–16:59 K2T 🌊 | 17–18:59 MrBurntYoghurt 🥛 | 19–20:59 Blean 🎧 | 21–22:59 TPBee 🐝 | 23–00:59 InterstellarAudio 🌌 | 01–02:59 DatuDNB ⚡",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "liquid",
+      "response": "This tune is wetter than a duck's socks.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "ll",
+      "response": "Liquid Love Raid Train I 6pm specialtater I 8pm turbolicious I 10pm mixmidi I 12pm phoenixfyrewolf I 2pm djspectro I 4pm tpbee I 6pm ignifluous I 8pm sleazy listening I 10pm chopper I 12am mamadre69 I all times >> MST <<",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "loft",
+      "response": "Big up the loft crew!!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "logos",
+      "response": "Logos - use the Commands !ubb !mhyh !inside !gff",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "loin",
+      "response": "May the seed of your loins be fruitful in the belly of your woman. BOOMSHANKA! ✌️☮️",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "love",
+      "response": "$(user) is feeling the love in here! Beautiful people, beautiful vibes! 🎵❤️",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "lovezzz",
+      "response": "SENDING MUCH MUCH LOVEZZZZ AND POSITIVE VIBEZZZZ TO EVERYONE 🙏 💜☯️💜☯️💜☯️💜☯️💜☯️💜",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "lube",
+      "response": "THERE'S ALWAYS TIME FOR LUBE",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "lurk",
+      "response": "Enjoy the lurk, $(sender)! We'll be here when you get back.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "lurk2",
+      "response": "Good luck in your lurk!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "lurk3",
+      "response": "When is a lurk not really a lurk? 🤔😂",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "lurk4",
+      "response": "Mmmm... the best kind of lurk! 😋",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "lurkout",
+      "response": "Get pumping! Enjoy your workout lurk! 💪🏽",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "lycra",
+      "response": "@djmagicmaudy commands everyone in chat to wear Lycra. 😬",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "m",
+      "response": "Nope! We don't do that here!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "march",
+      "response": "Stay locked in for more March madness in 2023...",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "maudy",
+      "response": "HE'S FROM THE FUTURE! 🥝",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "maudymaudy",
+      "response": "Welcome in @djmagicmaudy @maudydnb Welcome in! We love you both you crazy guys VoteYea VoteYea",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "mb",
+      "response": "Guess who's back, back again, Maudy's back, tell a friend. 🥝",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "md",
+      "response": "don't mind megaduckeh, it's an AI learning to MC",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "meatraffle2",
+      "response": "@djmagicmaudy just misses out on the beef roast! better luck next time bro 😂",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "meatraffle3",
+      "response": "@readysteadycookie meat you at the raffle protest picket line",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "melt",
+      "response": "This tune... is melting me!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "melt2",
+      "response": "This WEATHER is melting me!!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "menu",
+      "response": "\"Why has there never been Findus Crispy Spam Cakes?\" - @welshswanny",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "mg",
+      "response": "Yo! It's midnight gravy time! Splish, splosh!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "mike",
+      "response": "Mike Czech! Je to Daveův přítel!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "mix",
+      "response": "SHEEEEEEEEESHHHH THIS MIX IS PURE FIREEEEEEEEEE",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "mixit",
+      "response": "🎵🎶 Mix It Up Monday - April 17th 🎶🎵 Pacific Timezone | 10am-TRICKY_C- Twitch.tv/dj_tricky_c | 11am-GEN_X_SHOW- Twitch.tv/generationxshow | 1pm-TPBEE- Twitch.tv/tpbee | 3pm-SPINZY- Twitch.tv/djspinzy850 | 4pm-SPAED- Twitch.com/deejayspaed | 5pm-TROX- Twitch.tv/drumandbassics | 6pm-JEN_SYMMETRY- Twitch.tv/slpdnb | 7pm-D-FLY- Twitch.tv/dfly215 | 9pm-MF_MAMA- Twitch.tv/mf_mama | 11pm-FOOTNOTES- Twitch.tv/liquidcleanse",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "mixs",
+      "response": "sometimes is good, sometimes is a bit shit. S'all good tho, practice be practice.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "mixx",
+      "response": "I never guaranteed mixing, you can't hold me to it!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "modd",
+      "response": "I am a mod, I make commands >:]",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "moist",
+      "response": "Keepin' it liquid!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "morena",
+      "response": "crew 😜😜 morena",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "mr",
+      "response": "Guess who... it's @mike_roo ! 😁",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "music",
+      "response": "I like to music, music.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "nerds",
+      "response": "The geek shall inherit the Earth!!! 😁",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "night",
+      "response": "Good night, sleep well and thanks for stopping by 👋🏽",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "noise",
+      "response": "@tpbee the sound alerts aren't working",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "nom",
+      "response": "NomNom NomNom NomNom NomNom NomNom NomNom NomNom NomNom NomNom NomNom NomNom NomNom NomNom NomNom NomNom NomNom NomNom NomNom NomNom NomNom NomNom NomNom",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "nomic",
+      "response": "@tpbee is currently recording his mix and will respond shortly <3",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "nopass",
+      "response": "Are people still passing joints around?! I don't want your saliva thanks! 😂",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "nutlord",
+      "response": "Big up @5qrlmusic lord of the nut! 🥜🔩🌰",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "nz",
+      "response": "Kia Sorento! HeyGuys",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "ohheycap",
+      "response": "!kappagen ☁️ 420",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "pablo",
+      "response": "...stop it now, you're being silly LUL",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "pancake",
+      "response": "Smoke and a pancake?",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "pass",
+      "response": "${sender} puff puff passes on the left hand side to ${1}",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "pavlova",
+      "response": "No drama here! 😄",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "pee",
+      "response": "Back in a minute, gone for a tp pee, too many hydrate redemptions 😆",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "phartox",
+      "response": "Umm, did someone just... 💨",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "pl",
+      "response": "plinky plonky into wub wub @readysteadycookie",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "plink",
+      "response": "plonk",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "plonk",
+      "response": "For plonk see !wine",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "plur",
+      "response": "Peace☮️Love♥️Unity☯️Respect🤝",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "plurd",
+      "response": "Peace☮️Love♥️Unity☯️Respect🤝Ducks🦆",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "popout",
+      "response": "Erm, how about you just pop that back in again?!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "pp",
+      "response": "Check it!! poorlypromoted.live",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "pretty",
+      "response": "Everyone is pretty, everyone is hurting - JevHHD",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "priday",
+      "response": "TGI Priday!! 💃🎛🎶",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "python",
+      "response": "He's not the Messiah, he's a very naughty DJ!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "quack",
+      "response": "You lot are quackers!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "quack2",
+      "response": "I'm utterly addicted to quack.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "quote",
+      "response": "\"Good DJs play what you wanted to to hear, Great DJ's play what you didn't know you wanted to hear.\" W.Shakespeare (probably).",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "r",
+      "response": "Eeeeehhhh Wassuzp duck!? tpbee raid! lfgoooo tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid tpbeeCap TombRaid",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "r2",
+      "response": "bleep bloop bloop bleep",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "redline",
+      "response": "If you're not redlining you ain’t headlining",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "reds",
+      "response": "⚽ YOOOOUUUU REEEEEDDDDS! ⚽",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "rewind",
+      "response": "No freewinds ya cheap bastards!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "ride",
+      "response": "we along for the ride, we riding DUTTTTY",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "rigged",
+      "response": "It's a fix! A swindle! It just ain't fair! 😭",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "rinse",
+      "response": "It's like a flippin' launderette in here!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "rinse2",
+      "response": "Hold on to your hat duck, this is a PROPPAH RINSE AAAHHT!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "robinhood",
+      "response": "Nottingham Crew!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "rp2",
+      "response": "Hey heyyyy, it's @rebecca_priday ! Great to see you! 😁",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "rub",
+      "response": "Rub-a-dub-dub, 3 ducks in the pub tpbeeFuriousduck 🍻 tpbeeCigarduck tpbeeDuckspin",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "run",
+      "response": "Are you running from something? or towards something? 🏃🏽‍♂️ LUL",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "rusty",
+      "response": "The vinyl is dusty and I'm a bit rusty.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "santa",
+      "response": "⣿⣿⣿⣿⣿⣿⣿⡿⣿⠟⢿⢿⣿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⡟⠻⡟⠀⠏⠠⠃⠸⠃⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠿⣿⣿⣿⣿⣿⣿ ⣿⣿⠿⠛⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿ ⣿⠉⠀⠀⠀⠀⢀⣀⣤⣤⣤⡤⠀⠀⠀⠀⠀⠀⠀⠈⢹⣿⣿⣿⣿ ⣿⣿⡆⠀⠀⠀⣾⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⢠⣠⣿⣿⣿⣿⣿⣿ ⣿⣿⣧⡀⠀⠀⢿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣧⠀⠈⢿⡿⢿⠿⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⡆⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⣿⣷⣀⣄⠀⠀⠀⠀⠀⠀⠶⠂⠚⠻⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⠟⠁⠻⢿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿ ⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠙⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿ ⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿ ⣿⣿⣃⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣈⣻",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "sarah",
+      "response": "Where's Sarah?!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "saturday",
+      "response": "This saturday the 9th April - some old mates who used to mix with are getting back together and throwing a stream together. First time we have all been in the same room for at least 12 years! Come hang out and laugh with us - definitely some new dubs coming...",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "sax",
+      "response": "Saxamaphone, Saxamaphone",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "sax2",
+      "response": "Mmmm... saxy times!! 🎷🎷",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "saxy",
+      "response": "🎷 Let's have sax, right here, right now! 🎷",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "schadenfreude",
+      "response": "I'm not laughing WITH you, I'm laughing AT you 😉",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "schwifty",
+      "response": "Get on the floor! It's time to get schwifty in here tpbeeDuckspin",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "screen",
+      "response": "tpbee's screen is interactive, if you click the writing on the stream (not mobile atm!) then it may react.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "secret",
+      "response": "🤫",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "sendit",
+      "response": "He licked the stamp and sent that one",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "shabby",
+      "response": "Not too shabby at all!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "shake",
+      "response": "\"I'm at maximum arse shaking right now, there are no more gears!\" 🍑",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "shambles",
+      "response": "AS IF THERE'S NO SHAMBLES COMMAND WutFace",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "shed",
+      "response": "SHUT THAT DOOR! (In a Yorkshire accent)",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "shed2",
+      "response": "Put t'wood in t'ole lad.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "shoes",
+      "response": "What's that sound? I like that sound. I love that sound. It's the sound of my shoes.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "showerlurk",
+      "response": "Liquid lurker",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "sick",
+      "response": "Fetch a medic, this tune is sick AF!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "simply",
+      "response": "simply lovely",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "skank",
+      "response": "♫ ${sender} is skanking out in front of the speakers♫",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "slap",
+      "response": "$(sender) double slapps $(touser) round the chops tango style. Whoopass, simply lovely.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "slf",
+      "response": "Spunky Love Fun 💦",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "slits",
+      "response": "!slots all",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "smack",
+      "response": "$(sender) socks $(touser) one, right in the kisser - how very dare you.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "smutty",
+      "response": "Ooer missus, that's a little saucy! 🤭",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "snacks",
+      "response": "I hope you've brought enough for the whole class! 😋",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "snooker",
+      "response": "What a load of old balls.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "sns",
+      "response": "Sorry, not sorry!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "spam",
+      "response": "OH HEYYYY @ibohlution GREAT TO SEE YOU!! LUL LUL LUL LUL LUL LUL LUL LUL LUL LUL LUL LUL LUL LUL LUL LUL LUL LUL LUL LUL",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "spanner",
+      "response": "!kappagen 🔧",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "spotify",
+      "response": "NO!!!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "ss",
+      "response": "The man, the legend, the amigooo!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "stealpoints",
+      "response": "${sender} steals ${random.1-100}% of ${1}s Points!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "super",
+      "response": "The S, The U, The P, The E, The R The S, the H, the A the R the P The S, the H, the O, the O, the T, the E, the R",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "support",
+      "response": "♥ Thank you ${1} for your support ♥",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "swear",
+      "response": "Easy now, potty mouth! 🤣",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "swears",
+      "response": "Family show! 😲",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "sword",
+      "response": "Oh dear god, who gave her a sword?! 🙀",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "sword2",
+      "response": "It's not a sword, it's a magical wand! 🪄",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "take5",
+      "response": "Relax, take it easy, you're in good hands! 👊🏽",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "tc",
+      "response": "Take care my friend, see you again soon ❤",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "tea",
+      "response": "Get the kettle on, I'm parched! tpbeeTea",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "tea2",
+      "response": "It's PGtea for @tpbee tpbeeTea",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "teletubbies",
+      "response": "⏪Again! ⏪Again! ⏪",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "thumb",
+      "response": "1,2,3,4 I declare a thumb war! GO!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "thumb2",
+      "response": "5,6,7,8, I use this hand to masturb... 😆",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "tidal",
+      "response": "NO.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "tided",
+      "response": "Tided - the ultimate German Kebap engineer",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "tim",
+      "response": "He's an enchanter.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "timeless",
+      "response": "this music is timeless - can't stop, won't stop.",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "toast",
+      "response": "pipe and a pancake?",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "tues",
+      "response": "See you next Tuesday, yeah?!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "tuna",
+      "response": "Nothing fishy about this ABSOLUTE BANGER OF A TUNA!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "tune",
+      "response": "⣠⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⣄ ⠀⡇⡞⡛⠛⡛⠛⡛⣿⡟⠛⣿⣿⠛⢻⣿⡟⠛⣿⣿⠛⢻⣿⡟⠛⡛⠛⡛⣷⢸ ⠀⡇⣧⣤⡄⡀⣤⣤⣿⡇⠂⣿⣿⠐⢸⣿⡇⠂⠹⣿⠐⢸⣿⡇⠂⣶⣶⣶⣿⢸ ⠀⡇⣿⣿⡇⡀⣿⣿⣿⡇⠄⣿⣿⠠⢸⣿⡇⠂⡀⠈⠐⢸⣿⡇⠂⣀⣂⣿⣿⢸ ⠀⡇⣿⣿⡇⡀⣿⣿⣿⣇⠠⠙⠋⠄⣸⣿⡇⠂⣿⣆⠐⢸⣿⡇⠂⡛⠛⡛⣿⢸ ⠀⡇⢿⣿⣷⣶⣿⣿⣿⣿⣷⣶⣶⣾⣿⣿⣷⣶⣿⣿⣶⣾⣿⣷⣶⣶⣶⣶⡿⢸ ⠀⠙⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠋",
+      "kind": "static"
+    },
+    {
+      "trigger": "twerk",
+      "response": "Gotta get back t'werk!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "twss",
+      "response": "That's what she said! LUL",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "typo",
+      "response": "All is forgiven! Keep prodding that screen with your sausage fingers and hoping for the best! LUL",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "unicorn",
+      "response": "They like to use 9 inch railroad spike to nail down unicorns with dick horns... so you can't just pull it out... the unicorn I mean - @2lo_fi",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "unlurk",
+      "response": "$(user) has returned from the shadows! We missed you! 😘",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "v1bes",
+      "response": "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣤⠤⠀⠀⠤⣤⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⡆⠈⢠⣾⣷⡄⠁⢰⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠠⠆⠈⠋⠀⠶⠄⠙⠋⠠⠶⠀⠙⠁⠰⠄⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⣴⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣦⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⡉⠹⣿⠏⠉⢿⡿⠉⠉⢿⡿⠉⠹⣿⠏⢉⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⢰⣿⠀⡿⠀⡇⠸⡇⢸⡇⢸⠇⢸⠀⢿⠀⣿⡆⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⣿⣿⣦⣤⣼⣿⣤⣤⣾⣷⣤⣤⣿⣧⣤⣴⣿⣿⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠠⣤⣤⡤⠀⡀⠠⣤⣤⣤⣤⠄⢀⠀⢤⣤⣤⠄⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠹⠋⣤⣾⣿⣷⡌⠛⠛⢡⣾⣿⣷⣤⠙⠏⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⠶⣶⣶⣶⣶⣶⣶⣶⣶⠶⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "vibe",
+      "response": "vibe check passed!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "vibes",
+      "response": "⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀ ⣿⣿⣿⣿⣿⣿⣿⣏⢀⣹⡇⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⡉⠙⣿⠏⠈⡏⠉⢻⡇⠀⢉⡀⠉⢻⡿⠋⢁⣈⠙⢻⡟⠉⣀⠉⢹⣿⣿ ⣿⣿⣧⠀⠙⠀⣸⡇⠀⢸⡇⠀⣿⣿⠀⠈⡇⠀⣉⣉⣀⣀⣧⣀⡈⠙⢻⣿⣿ ⣿⣿⣿⣇⠀⣰⣿⣇⠀⣸⡇⢀⡈⠉⢀⣼⣷⣀⠈⠉⢁⣸⣅⠈⠉⢀⣸⣿⣿ ⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠋ ⠀⠀⠉⠉⢻⣿⣿⡿⠋⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠀⠀ ⠀⠀⠀⣀⠾⠟⠋",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "volume",
+      "response": "Nah mate, that's definitely your browser 😆",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "vr",
+      "response": "It's vinyl roulette time!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "vr2",
+      "response": "Here's another 12 inches of goodness for your listening pleasure!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "vubes",
+      "response": "!vibes , you mean vibes, right?! LUL",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "wab",
+      "response": "Wabbo Wabby Wab",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "waffle",
+      "response": "Cigar and a waffle?",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "water",
+      "response": "H2O is good for everyone! Drink up",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "weather1",
+      "response": "It's warm innit 😅",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "weather2",
+      "response": "It's cowd innit! ❄️",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "wecome",
+      "response": "Wecome, youcome , everybody comes!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "weiners",
+      "response": "Every little helps 😜",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "welcome",
+      "response": "Welcome in raiders, new followers, supporters, family, vibers and the like!! <3",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "whisper",
+      "response": "Here comes the duck whisperer! 🦆🤫",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "wi",
+      "response": "Welcome in friend! It's good to have you here. 🦆",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "wi2",
+      "response": "Welcome back friend! 🦆",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "wine",
+      "response": "tpbee is probaby drinking a tasty red from Laithwaites",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "wine2",
+      "response": "Why is the wine always gone?!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "wine3",
+      "response": "Tasting notes: \"is it smashable? Yes/No\"",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "wine4",
+      "response": "Yeah we need more commands, and more wine! LUL",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "wine5",
+      "response": "My absolute mission is a drink and a wobble about! 🍷",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "wintercap",
+      "response": "Shhhh... She's highbernating 🤫",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "wish",
+      "response": "🧞‍♂️ @megaduckeh grants you three wishes. Use them wisely! 🧞‍♂️",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "wj",
+      "response": "Wubbly jubbly!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "words",
+      "response": "Words are hard mannnn... LUL",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "world",
+      "response": "International Crew!! 👊🌍",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "wub",
+      "response": "wuuuuuuuubly!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "wub1",
+      "response": "Wub one out! WutFace",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "ww",
+      "response": "Come Join Us For Wicked Wednesdays!!! Give a follow to these Wicked Artists! Twitch.com/Gro_tv 12pm-2pm /// Twitch.com/TpBee 2pm-4pm /// Twitch.com/BeatsPacifikGuru 4pm-7pm /// Twitch.com/PsidreamDNB 7pm-9pm/// *Raiding into Slipirie* Twitch.com/Slipirie 9pm-Late All Set Times In MST!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "yeah",
+      "response": "Nah!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "yeet",
+      "response": "Just yeet it down the stairs! LUL",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "yorkshire",
+      "response": "Pudding",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "zero",
+      "response": "Uh ohhhh, what's he eating now?! 😬",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "zero2",
+      "response": "Uh ohhhh, what's he pee'd on today?!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "zfg",
+      "response": "\"Zero Fu*ks Given\" in other languages   / It's a sausage to me (German)   / I care a cucumber (Spanish)   / It can oxidize on my anus (Dutch)   / I slap my balls on it (French)   / It interests me as much as a kilogram of sh*t (Finnish)   / Flowers on my d*ck and bees all around (Greek)   (Source unknown and unverified.)",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "☁️",
+      "response": "A super secret special cloud appears, just for @captainedith <3",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "🍪",
+      "response": "!kappagen 🍪 420",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "🔧",
+      "response": "SPANNNNNEEERRRRRRRRRR!!!!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "🥔",
+      "response": "TATERRRRR!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "🥔🥔",
+      "response": "Ttttaaaattttteeeerrrr!!!",
+      "kind": "ai_influenced"
+    },
+    {
+      "trigger": "🥝",
+      "response": "He's fuzzy, he's fruity, he's everyone's favourite kiwi DJ, it's @m4ud3y in the house!! 🤘🏻",
+      "kind": "ai_influenced"
+    }
+  ]
+};
+  /* COMMANDS:END */
+
+  var useful = COMMANDS.useful || [];
+  var other = COMMANDS.other || [];
+
+  function appendTags(container, rec){
+    var trigger = document.createElement("span");
+    trigger.className = "cl-trigger";
+    trigger.textContent = "!" + rec.trigger;
+    container.appendChild(trigger);
+
+    if (rec.kind === "ai_influenced") {
+      var aiTag = document.createElement("span");
+      aiTag.className = "cl-tag";
+      aiTag.textContent = "AI";
+      container.appendChild(aiTag);
+    }
+
+    if (rec.access) {
+      var accTag = document.createElement("span");
+      accTag.className = "cl-tag";
+      accTag.textContent = rec.access;
+      container.appendChild(accTag);
+    }
+  }
+
+  // Useful commands stay fully visible - short list, worth reading at a glance.
+  function makeItem(rec){
+    var el = document.createElement("div");
+    el.className = "cl-item";
+    appendTags(el, rec);
+
+    var resp = document.createElement("span");
+    resp.className = "cl-resp";
+    resp.textContent = rec.response;
+    el.appendChild(resp);
+
+    el._search = ("!" + rec.trigger + " " + rec.response).toLowerCase();
+    return el;
+  }
+
+  // Everything-else commands are mostly one-line jokes - collapse them into
+  // tap-to-reveal chips instead of 350+ identical open cards.
+  function makeChip(rec){
+    var el = document.createElement("details");
+    el.className = "cl-chip";
+
+    var summary = document.createElement("summary");
+    appendTags(summary, rec);
+    el.appendChild(summary);
+
+    var resp = document.createElement("div");
+    resp.className = "cl-resp";
+    resp.textContent = rec.response;
+    el.appendChild(resp);
+
+    el._search = ("!" + rec.trigger + " " + rec.response).toLowerCase();
+    return el;
+  }
+
+  var usefulEl = document.getElementById("cl-useful");
+  var otherEl = document.getElementById("cl-other");
+
+  useful.forEach(function(rec){ usefulEl.appendChild(makeItem(rec)); });
+  other.forEach(function(rec){ otherEl.appendChild(makeChip(rec)); });
+
+  var qEl = document.getElementById("cl-q");
+  var emptyEl = document.getElementById("cl-empty");
+
+  function render(){
+    var q = qEl.value.trim().toLowerCase();
+    var totalShown = 0;
+
+    [usefulEl, otherEl].forEach(function(list){
+      var shown = 0;
+      var kids = list.children;
+      for (var i = 0; i < kids.length; i++) {
+        var el = kids[i];
+        var vis = !q || el._search.indexOf(q) !== -1;
+        el.style.display = vis ? "" : "none";
+        if (vis) shown++;
+      }
+      totalShown += shown;
+      var section = list.closest(".cl-section");
+      section.style.display = shown ? "" : "none";
+    });
+
+    emptyEl.hidden = totalShown !== 0;
+  }
+
+  qEl.addEventListener("input", render);
+  render();
+})();
+</script>
+
+</body>
+</html>
