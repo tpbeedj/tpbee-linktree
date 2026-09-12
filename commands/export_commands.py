@@ -62,17 +62,21 @@ def build_records(commands):
     return {"useful": useful, "other": other}
 
 
-def main():
-    source = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_SOURCE
+def regenerate(source=None):
+    """Rewrite index.html's embedded data from commands.json. Returns a dict
+    of counts (useful, other, hidden = disabled commands not published) for
+    callers that want a summary instead of parsing printed text."""
+    source = Path(source) if source else DEFAULT_SOURCE
     if not source.exists():
-        raise SystemExit(f"commands.json not found at {source}")
+        raise FileNotFoundError(f"commands.json not found at {source}")
 
     data = json.loads(source.read_text(encoding="utf-8"))
-    records = build_records(data.get("commands", {}))
+    commands = data.get("commands", {})
+    records = build_records(commands)
 
     html = PAGE.read_text(encoding="utf-8")
     if START_MARKER not in html or END_MARKER not in html:
-        raise SystemExit(f"Markers not found in {PAGE} - page template may have changed.")
+        raise RuntimeError(f"Markers not found in {PAGE} - page template may have changed.")
 
     payload = "var COMMANDS = " + json.dumps(records, ensure_ascii=False, indent=2) + ";"
     replacement = f"{START_MARKER}\n  {payload}\n  {END_MARKER}"
@@ -83,7 +87,22 @@ def main():
     new_html = pattern.sub(lambda _m: replacement, html, count=1)
     PAGE.write_text(new_html, encoding="utf-8")
 
-    print(f"Wrote {len(records['useful'])} useful + {len(records['other'])} other commands to {PAGE}")
+    useful, other = len(records["useful"]), len(records["other"])
+    return {
+        "useful": useful,
+        "other": other,
+        "hidden": len(commands) - (useful + other),
+    }
+
+
+def main():
+    source = sys.argv[1] if len(sys.argv) > 1 else None
+    try:
+        counts = regenerate(source)
+    except (FileNotFoundError, RuntimeError) as e:
+        raise SystemExit(str(e))
+    print(f"Wrote {counts['useful']} useful + {counts['other']} other commands to {PAGE} "
+          f"({counts['hidden']} disabled, not published)")
 
 
 if __name__ == "__main__":
